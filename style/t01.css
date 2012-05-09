@@ -1,0 +1,33 @@
+#titleDiv
+{
+	position: fixed;
+	
+	margin-left: 25px;
+	
+	font-size: 17pt;
+	font-weight: bold;
+}
+
+#canvasBox
+{
+	position: absolute;
+	
+	top: 50px;
+	left: 325px;
+}
+
+#p11CanvasDiv
+{
+	width: 640px;
+	height: 360px;
+	
+	border: 1px solid #000000;
+}
+
+#p12CanvasDiv
+{
+	width: 640px;
+	height: 360px;
+	
+	border: 1px solid #ff0000;
+}
