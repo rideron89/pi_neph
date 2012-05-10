@@ -32,10 +32,20 @@
 	left: 15px;
 }
 
-.yAxisTitle
+.legend
 {
 	position: absolute;
 	z-index: 4;
+	top: 30px;
+	left: 410px;
+	
+	border: 1px solid #888888;
+}
+
+.yAxisTitle
+{
+	position: absolute;
+	z-index: 5;
 	left: -135px;
 	
 	width: 100%;
@@ -55,7 +65,7 @@
 .xAxisTitle
 {
 	position: absolute;
-	z-index: 5;
+	z-index: 6;
 	bottom: 10px;
 	
 	width: 100%;
@@ -70,7 +80,7 @@
 .canvasTitle
 {
 	position: absolute;
-	z-index: 6;
+	z-index: 7;
 	top: 15px;
 	
 	width: 100%;

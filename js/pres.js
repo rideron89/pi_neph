@@ -1,20 +1,20 @@
-function graphScat(flight, color)
+function graphPres(flight, color)
 {
 	var post = $.post("../php/getScatData.php",
-		{flight: flight, request: "scat"});
+		{flight: flight, request: "pressure"});
 	
 	if(!color)
-		post.color = "blue";
+		post.color = "orange";
 	else
 		post.color = color;
 	
-	post.done(ScatGraph);
+	post.done(PresGraph);
 }
 
-function moveScatTimeLine()
+function movePresTimeLine()
 {
 	var x;
-	var timeLine = document.getElementById("scatTimeLine");
+	var timeLine = document.getElementById("presTimeLine");
 	var times = document.getElementById("timeSelect");
 	var width = 640;
 	var padding = 64;
@@ -26,7 +26,7 @@ function moveScatTimeLine()
 	timeLine.style.left = x + "px";
 }
 
-function ScatGraph(output, statusText, jqxhr)
+function PresGraph(output, statusText, jqxhr)
 {
 	var width = 640;
 	var height = 360;
@@ -35,12 +35,12 @@ function ScatGraph(output, statusText, jqxhr)
 	var secondaryColor = "black";
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;
-	var largestY = 90;
+	var largestY = 120;
 
 	var data = output.split(",");
-	var graph = document.getElementById("scatGraph");
-	var dataPoints = document.getElementById("scatDataPoints");
-	var timeLine = document.getElementById("scatTimeLine");
+	var graph = document.getElementById("presGraph");
+	var dataPoints = document.getElementById("presDataPoints");
+	var timeLine = document.getElementById("presTimeLine");
 	var context = null;
 	
 	var setupGraph = function()
@@ -92,13 +92,13 @@ function ScatGraph(output, statusText, jqxhr)
 	
 	var updateTitle = function()
 	{
-		var title = document.getElementById("scatCanvasTitle");
-		var xAxis = document.getElementById("scatXAxisTitle");
-		var yAxis = document.getElementById("scatYAxisTitle");
+		var title = document.getElementById("presCanvasTitle");
+		var xAxis = document.getElementById("presXAxisTitle");
+		var yAxis = document.getElementById("presYAxisTitle");
 
-		title.innerHTML = "Linear Scattering Coefficient at 532nm ";
+		title.innerHTML = "Pressure Inside the PI-Neph Measurement Chamber ";
 		xAxis.innerHTML = "Time From Previous Midnight UTC [sec]";
-		yAxis.innerHTML = "Scattering Coefficient of Aerosol [1/Mm]";
+		yAxis.innerHTML = "Pressure Measured [Pa]";
 	};
 	
 	var drawAxes = function()
@@ -134,13 +134,15 @@ function ScatGraph(output, statusText, jqxhr)
 			context.lineTo(x, padding);
 		}
 		
-		for(i = 0; i < ((largestY+2) / 9); i++)
+		for(i = 0; i < 7; i++)
 		{
 			y = height - (padding * 2);
-			y = y / (largestY / 9) * i;
+			y = y / 6 * i;
 			y = y + padding;
 			
-			text = parseInt(largestY - (i * 10));
+			text = largestY - (20 * i);
+			if(text >= 1)
+				text += "k";
 			
 			context.globalAlpha = alphaHigh;
 			context.fillText(text,
@@ -169,7 +171,7 @@ function ScatGraph(output, statusText, jqxhr)
 	
 	var plotPoints = function()
 	{
-		var x, y;
+		var x, y, temp;
 		var times = document.getElementById("timeSelect");
 		
 		context = dataPoints.getContext("2d");
@@ -185,7 +187,11 @@ function ScatGraph(output, statusText, jqxhr)
 			x = x + padding;
 		
 			y = height - (padding * 2);
-			y = y / (largestY + 10) * (largestY - data[i]);
+			
+			temp = height - (padding * 2);
+			temp = temp / largestY * (data[i] / 1000);
+			
+			y = y - temp;
 			y = y + padding;
 		
 			context.moveTo(x, y);

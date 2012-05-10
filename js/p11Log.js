@@ -166,16 +166,4 @@ function P11LogGraph(output)
 	updateTitle();
 	drawAxes();
 	plotPoints();
-	
-	// draw the graphs
-	if(!$("#p11LogCanvasDiv").is(":visible"))
-		$("#p11LogCanvasDiv").show("blind", function()
-		{
-			if(!$("#p11CanvasDiv").is(":visible"))
-				$("#p11CanvasDiv").show("blind", function()
-			{
-				if(!$("#scatCanvasDiv").is(":visible"))
-					$("#scatCanvasDiv").show("blind");
-			});
-		});
 }

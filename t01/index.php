@@ -20,6 +20,9 @@
 		<script src="../js/p11Log.js"></script>
 		<script src="../js/p11.js"></script>
 		<script src="../js/scat.js"></script>
+		<script src="../js/pres.js"></script>
+		<script src="../js/temp.js"></script>
+		<script src="../js/rh.js"></script>
 	</head>
 	<body>
 		
@@ -124,6 +127,36 @@
 				<canvas id="scatGraph" class="graph"></canvas>
 				<canvas id="scatDataPoints" class="dataPoints"></canvas>
 				<canvas id="scatTimeLine" class="timeLine"></canvas>
+			</div>
+			
+			<div id="presCanvasDiv" class="canvasDiv">
+				<div id="presCanvasTitle" class="canvasTitle"></div>
+				<div id="presYAxisTitle" class="yAxisTitle"></div>
+				<div id="presXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="presGraph" class="graph"></canvas>
+				<canvas id="presDataPoints" class="dataPoints"></canvas>
+				<canvas id="presTimeLine" class="timeLine"></canvas>
+			</div>
+			
+			<div id="tempCanvasDiv" class="canvasDiv">
+				<div id="tempCanvasTitle" class="canvasTitle"></div>
+				<div id="tempYAxisTitle" class="yAxisTitle"></div>
+				<div id="tempXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="tempGraph" class="graph"></canvas>
+				<canvas id="tempDataPoints" class="dataPoints"></canvas>
+				<canvas id="tempTimeLine" class="timeLine"></canvas>
+			</div>
+			
+			<div id="rhCanvasDiv" class="canvasDiv">
+				<div id="rhCanvasTitle" class="canvasTitle"></div>
+				<div id="rhYAxisTitle" class="yAxisTitle"></div>
+				<div id="rhXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="rhGraph" class="graph"></canvas>
+				<canvas id="rh1DataPoints" class="dataPoints"></canvas>
+				<canvas id="rh2DataPoints" class="dataPoints"></canvas>
+				<canvas id="rh3DataPoints" class="dataPoints"></canvas>
+				<canvas id="rhTimeLine" class="timeLine"></canvas>
+				<canvas id="rhLegend" class="legend"></canvas>
 			</div>
 		</div> <!-- canvasBox -->
 	</body>

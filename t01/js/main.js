@@ -1,22 +1,28 @@
 var time = 0;
 
+/*
+ * Initialize all jQuery widgets (sliders, buttons, etc...)
+ */
 $(document).ready(function()
 {
 	$("#loadingIconDiv").slideDown(400);
 	
 	$("#timeSlider").slider({
+		stop: updateDisplayTime,
 		slide: updateDisplayTime,
 		change: updateSlider
 	});
 	
 	$("input:button").button();
-	
 	$("#minusButton").click(decrement);
 	$("#plusButton").click(increment);
 	
 	readTimes();
 });
 
+/*
+ * Hide the 'Loading Data' icon/message.
+ */
 $(document).ajaxStop(function()
 {
 	$("#loadingIconDiv").slideUp(400);
@@ -64,6 +70,11 @@ function saveTimes(output)
 	graphP11Log("t01");
 	graphP11("t01");
 	graphScat("t01");
+	graphPres("t01");
+	graphTemp("t01");
+	graphRH("t01");
+	
+	drawGraphs();
 	
 	$.ajax({
 		type: "POST",
@@ -82,14 +93,41 @@ function saveTimes(output)
 	});*/
 }
 
+function drawGraphs()
+{
+	$.fx.speeds._default = 175;
+	
+	// draw the graphs
+	if(!$("#p11LogCanvasDiv").is(":visible"))
+		$("#p11LogCanvasDiv").show("blind", function()
+		{
+			if(!$("#p11CanvasDiv").is(":visible"))
+				$("#p11CanvasDiv").show("blind", function()
+			{
+				if(!$("#scatCanvasDiv").is(":visible"))
+					$("#scatCanvasDiv").show("blind", function()
+				{
+					if(!$("#presCanvasDiv").is(":visible"))
+						$("#presCanvasDiv").show("blind", function()
+					{
+						if(!$("#tempCanvasDiv").is(":visible"))
+							$("#tempCanvasDiv").show("blind", function()
+						{
+							if(!$("#rhCanvasDiv").is(":visible"))
+								$("#rhCanvasDiv").show("blind");
+						});
+					});
+				});
+			});
+	});
+}
+
 function updateGraphs()
 {
 	var select = document.getElementById("timeSelect");
 	
 	graphP11Log("t01");
 	graphP11("t01");
-	
-	moveScatTimeLine();
 	
 	$.ajax({
 		type: "POST",
@@ -106,6 +144,14 @@ function updateGraphs()
 		data: {time: select.options[time].text},
 		dataType: "text"
 	});*/
+}
+
+function moveTimeLines()
+{
+	moveScatTimeLine();
+	movePresTimeLine();
+	moveTempTimeLine();
+	moveRHTimeLine();
 }
 
 function showCoefficientData(output)

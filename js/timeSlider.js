@@ -23,6 +23,8 @@ function updateDisplayTime()
 	
 	document.getElementById("rangeCurrent").innerHTML =
 		document.getElementById("timeSelect").options[time].text;
+	
+	moveTimeLines();
 }
 
 /*
