@@ -1,11 +1,14 @@
 #titleDiv
 {
 	position: fixed;
+	top: 15px;
+	left: 10px;
 	
-	margin-left: 25px;
-	
+	padding: 10px;
 	font-size: 17pt;
 	font-weight: bold;
+	
+	vertical-align: middle;
 }
 
 #canvasBox
@@ -16,18 +19,11 @@
 	left: 325px;
 }
 
-#p11CanvasDiv
+#backLink
 {
-	width: 640px;
-	height: 360px;
+	margin-right: 10px;
 	
-	border: 1px solid #000000;
-}
-
-#p12CanvasDiv
-{
-	width: 640px;
-	height: 360px;
+	font-size: 8pt;
 	
-	border: 1px solid #ff0000;
+	vertical-align: middle;
 }

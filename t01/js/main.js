@@ -4,6 +4,16 @@ $(document).ready(function()
 {
 	$("#loadingIconDiv").slideDown(400);
 	
+	$("#timeSlider").slider({
+		slide: updateDisplayTime,
+		change: updateSlider
+	});
+	
+	$("input:button").button();
+	
+	$("#minusButton").click(decrement);
+	$("#plusButton").click(increment);
+	
 	readTimes();
 });
 
@@ -32,29 +42,28 @@ function saveTimes(output)
 {
 	if(output[0] == "!")
 	{
-		document.getElementById("warningInfoDiv").innerHTML = output;
+		document.getElementById("errorInfoDiv").innerHTML = output;
 		return;
 	}
 	
 	var times = output.split(",");
 	var select = document.getElementById("timeSelect");
 	
+	// save the times
 	for(var i = 0; i < times.length-1; i++)
 		select.options[select.options.length] =
 			new Option(times[i], i);
 
-	// set the time variable to the default value of the select box
+	// configure the time slider
 	time = document.getElementById("timeSelect").value;
-
-	// set the range's current text to the select box's current time
 	document.getElementById("rangeCurrent").innerHTML =
 		document.getElementById("timeSelect").options[time].text;
-
-	// set the range's number of selections to the number of times
-	document.getElementById("timeRange").max =
-		document.getElementById("timeSelect").length - 1;
+	$("#timeSlider").slider("option", "max",
+		document.getElementById("timeSelect").length - 1);
 	
 	graphP11Log("t01");
+	graphP11("t01");
+	graphScat("t01");
 	
 	$.ajax({
 		type: "POST",
@@ -76,6 +85,11 @@ function saveTimes(output)
 function updateGraphs()
 {
 	var select = document.getElementById("timeSelect");
+	
+	graphP11Log("t01");
+	graphP11("t01");
+	
+	moveScatTimeLine();
 	
 	$.ajax({
 		type: "POST",

@@ -3,22 +3,34 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>B200 Test Flight (T01)</title>
+		
+		<link href="../style/ui/theme.css" rel="stylesheet"
+			  type="text/css" />
 		<link href="../style/general.css" rel="stylesheet" type="text/css" />
 		<link href="../style/pinnedDataBox.css" rel="stylesheet"
 			  type="text/css" />
 		<link href="../style/graph.css" rel="stylesheet" type="text/css" />
 		<link href="../style/t01.css" rel="stylesheet" type="text/css" />
-		<script src="../js/jquery172.js"></script>
-		<script src="../js/jqueryui/jqueryui1819.js"></script>
+		
+		<script src="../js/jquery/jquery.js"></script>
+		<script src="../js/jquery/jqueryui.js"></script>
 		<script src="../js/utils.js"></script>
-		<script src="../js/timeRange.js"></script>
+		<script src="../js/timeSlider.js"></script>
 		<script src="js/main.js"></script>
 		<script src="../js/p11Log.js"></script>
+		<script src="../js/p11.js"></script>
+		<script src="../js/scat.js"></script>
 	</head>
 	<body>
-		<div id="titleDiv">
+		
+		
+		<span id="titleDiv">
+			<a id="backLink" class="buttonLink" href="..">
+				Back
+			</a>
+			
 			B200 Test Flight (T01)
-		</div>
+		</span>
 		
 		<div id="pinnedDataBox">
 			<div id="browserMessage">
@@ -32,13 +44,10 @@
 					Graph Time (Seconds)
 				</div>
 				
-				<div id="timeSlider">
-					<input id="timeMinus" type="button" value="-"
-						onclick="decrement()" />
-					<input id="timeRange" type="range" min="0" max="0" step="1"
-						value="0" onchange="updateRange()" />
-					<input id="timePlus" type="button" value="+"
-						onclick="increment()" />
+				<div id="timeSliderDiv">
+					<input id="minusButton" type="button" value="-" />
+					<div id="timeSlider"></div>
+					<input id="plusButton" type="button" value="+" />
 				</div>
 				
 				<div id="timeSliderPosition">
@@ -84,6 +93,14 @@
 		</div> <!-- pinnedDataBox -->
 		
 		<div id="canvasBox">
+			<div id="p11LogCanvasDiv" class="canvasDiv">
+				<div id="p11LogCanvasTitle" class="canvasTitle"></div>
+				<div id="p11LogYAxisTitle" class="yAxisTitle"></div>
+				<div id="p11LogXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="p11LogGraph" class="graph"></canvas>
+				<canvas id="p11LogDataPoints" class="dataPoints"></canvas>
+			</div>
+			
 			<div id="p11CanvasDiv" class="canvasDiv">
 				<div id="p11CanvasTitle" class="canvasTitle"></div>
 				<div id="p11YAxisTitle" class="yAxisTitle"></div>
@@ -98,6 +115,15 @@
 				<div id="p12XAxisTitle" class="xAxisTitle"></div>
 				<canvas id="p12Graph" class="graph"></canvas>
 				<canvas id="p12DataPoints" class="dataPoints"></canvas>
+			</div>
+			
+			<div id="scatCanvasDiv" class="canvasDiv">
+				<div id="scatCanvasTitle" class="canvasTitle"></div>
+				<div id="scatYAxisTitle" class="yAxisTitle"></div>
+				<div id="scatXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="scatGraph" class="graph"></canvas>
+				<canvas id="scatDataPoints" class="dataPoints"></canvas>
+				<canvas id="scatTimeLine" class="timeLine"></canvas>
 			</div>
 		</div> <!-- canvasBox -->
 	</body>

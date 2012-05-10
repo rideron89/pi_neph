@@ -53,6 +53,21 @@
 	text-align: center;
 }
 
+#timeSliderDiv
+{
+	display: -webkit-box;
+		-webkit-box-orient: horizontal;
+		-webkit-box-pack: justify;
+		-webkit-box-align: center;
+	
+	margin-top: 10px;
+}
+
+#timeSlider
+{
+	width: 90px;
+}
+
 #dataInformationBox
 {
 	padding: 10px;

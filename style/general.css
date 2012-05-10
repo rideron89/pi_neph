@@ -3,3 +3,29 @@ html,body
 	font-family: sans-serif;
 	font-size: 9pt;
 }
+
+.buttonLink
+{
+	padding: 6px;
+
+	color: #000000;
+
+	text-decoration: none;
+
+	border: 1px solid #b3bead;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+
+	background: #dfe5d7;
+
+	-webkit-transition: background 100ms ease-in-out;
+	-moz-transition: background 100ms ease-in-out;
+	-ms-transition: background 100ms ease-in-out;
+	-o-transition: background 100ms ease-in-out;
+	transition: background 100ms ease-in-out;
+}
+
+.buttonLink:hover
+{
+	background: #d5cea6;
+}
