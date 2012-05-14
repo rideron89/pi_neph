@@ -7,11 +7,16 @@
 		$data = "";
 		
 		$con = connect($flight);
+		
 		$query = "SELECT * FROM location WHERE mid_utc = ?";
 		$param = array($_POST["time"]);
 		$statement = $con->prepare($query);
 		$statement->execute($param);
+		
 		$result = $statement->fetchObject();
+		
+		if(!$result)
+			throw new Exception("@Location table is empty!");
 		
 		$data .= (float)$result->lat_deg . ",";
 		$data .= (float)$result->lat_min . ",";
@@ -30,5 +35,9 @@
 	catch(PDOException $e)
 	{
 		echo ("!" . $e->getMessage());
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

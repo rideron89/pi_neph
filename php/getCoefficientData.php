@@ -7,12 +7,16 @@
 		$data = "";
 		
 		$con = connect($flight);
+		
 		$query = "SELECT * FROM scat_coefficient WHERE mid_utc = ?";
 		$param = array($_POST["time"]);
 		$statement = $con->prepare($query);
 		$statement->execute($param);
 		
 		$result = $statement->fetchObject();
+		
+		if(!$result)
+			throw new Exception("@Coefficient table is empty!");
 		
 		$data .= $result->start_utc . ",";
 		$data .= $result->end_utc . ",";
@@ -32,5 +36,9 @@
 	catch(PDOException $e)
 	{
 		echo ("!" . $e->getMessage());
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

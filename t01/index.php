@@ -9,6 +9,7 @@
 		<link href="../style/general.css" rel="stylesheet" type="text/css" />
 		<link href="../style/pinnedDataBox.css" rel="stylesheet"
 			  type="text/css" />
+		<link href="../style/toc.css" rel="stylesheet" type="text/css" />
 		<link href="../style/graph.css" rel="stylesheet" type="text/css" />
 		<link href="../style/t01.css" rel="stylesheet" type="text/css" />
 		
@@ -21,11 +22,13 @@
 		<script src="../js/jquery/jqueryui.js"></script>
 		<script src="../js/utils.js"></script>
 		<script src="../js/timeSlider.js"></script>
+		<script src="../js/toc.js"></script>
 		<script src="../js/main.js"></script>
 		<script src="../js/p11Log.js"></script>
 		<script src="../js/p11.js"></script>
 		<script src="../js/p12.js"></script>
 		<script src="../js/scat.js"></script>
+		<script src="../js/alt.js"></script>
 		<script src="../js/pres.js"></script>
 		<script src="../js/temp.js"></script>
 		<script src="../js/rh.js"></script>
@@ -101,6 +104,41 @@
 			</div>
 		</div> <!-- pinnedDataBox -->
 		
+		<div id="tocBox">
+			<div id="tocLabel" onclick="toggleToc()">
+				<button id="tocButton">
+					Table of Contents
+				</button>
+			</div>
+			
+			<div id="tocItems">
+				<button class="tocItem"  onclick="tocItem('p11LogCanvasDiv')">
+					P11, aerosol only phase function
+				</button><br />
+				<button class="tocItem" onclick="tocItem('p11CanvasDiv')">
+					P11, aerosol only phase function (small)
+				</button><br />
+				<button class="tocItem" onclick="tocItem('p12CanvasDiv')">
+					-P12/P11, aerosol only degree of linear polarization
+				</button><br />
+				<button class="tocItem" onclick="tocItem('scatCanvasDiv')">
+					Linear Scattering Coefficient
+				</button><br />
+				<button class="tocItem" onclick="tocItem('altCanvasDiv')">
+					GPS Altitude
+				</button><br />
+				<button class="tocItem" onclick="tocItem('presCanvasDiv')">
+					Pressure Inside PI-Neph Chamber
+				</button><br />
+				<button class="tocItem" onclick="tocItem('tempCanvasDiv')">
+					Temperature Inside PI-Neph Chamber
+				</button><br />
+				<button class="tocItem" onclick="tocItem('rhCanvasDiv')">
+					Relative Humidity
+				</button>
+			</div>
+		</div> <!-- tocBox -->
+		
 		<div id="canvasBox">
 			<div id="p11LogCanvasDiv" class="canvasDiv">
 				<div id="p11LogCanvasTitle" class="canvasTitle"></div>
@@ -133,6 +171,15 @@
 				<canvas id="scatGraph" class="graph"></canvas>
 				<canvas id="scatDataPoints" class="dataPoints"></canvas>
 				<canvas id="scatTimeLine" class="timeLine"></canvas>
+			</div>
+			
+			<div id="altCanvasDiv" class="canvasDiv">
+				<div id="altCanvasTitle" class="canvasTitle"></div>
+				<div id="altYAxisTitle" class="yAxisTitle"></div>
+				<div id="altXAxisTitle" class="xAxisTitle"></div>
+				<canvas id="altGraph" class="graph"></canvas>
+				<canvas id="altDataPoints" class="dataPoints"></canvas>
+				<canvas id="altTimeLine" class="timeLine"></canvas>
 			</div>
 			
 			<div id="presCanvasDiv" class="canvasDiv">

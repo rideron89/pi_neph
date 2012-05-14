@@ -1,3 +1,19 @@
+function testOutput(output)
+{
+	if(output[0] == "!")
+	{
+		errorMessage(mysqlError(output.substr(1)));
+		return -2;
+	}
+	else if(output[0] == "@")
+	{
+		warningMessage(output.substr(1));
+		return -1;
+	}
+	
+	return 1;
+}
+
 function secondsToCalendar(seconds)
 {
 	var string = "";

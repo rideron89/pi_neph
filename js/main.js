@@ -5,6 +5,7 @@ var time = 0;
  */
 $(document).ready(function()
 {
+	$("#tocItems").hide();
 	$("#loadingIconDiv").slideDown(400);
 	
 	$("#timeSlider").slider({
@@ -71,6 +72,7 @@ function saveTimes(output)
 	graphP11(flight, "red");
 	graphP12(flight, "green");
 	graphScat(flight, minTime, "blue");
+	graphAlt(flight, minTime, "purple");
 	graphPres(flight, minTime, "orange");
 	graphTemp(flight, minTime, "yellow");
 	graphRH(flight, minTime, "green", "orange", "purple");
@@ -85,13 +87,13 @@ function saveTimes(output)
 		dataType: "text"
 	});
 	
-	/*$.ajax({
+	$.ajax({
 		type: "POST",
 		url: "../php/getLocationData.php",
 		success: showLocationData,
-		data: {flight: "t01", time: select.options[time].text},
+		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
-	});*/
+	});
 }
 
 function drawGraphs()
@@ -111,14 +113,18 @@ function drawGraphs()
 				if(!$("#scatCanvasDiv").is(":visible"))
 					$("#scatCanvasDiv").show("blind", function()
 				{
-					if(!$("#presCanvasDiv").is(":visible"))
-						$("#presCanvasDiv").show("blind", function()
+					if(!$("#altCanvasDiv").is(":visible"))
+						$("#altCanvasDiv").show("blind", function()
 					{
-						if(!$("#tempCanvasDiv").is(":visible"))
-							$("#tempCanvasDiv").show("blind", function()
+						if(!$("#presCanvasDiv").is(":visible"))
+							$("#presCanvasDiv").show("blind", function()
 						{
-							if(!$("#rhCanvasDiv").is(":visible"))
-								$("#rhCanvasDiv").show("blind");
+							if(!$("#tempCanvasDiv").is(":visible"))
+								$("#tempCanvasDiv").show("blind", function()
+							{
+								if(!$("#rhCanvasDiv").is(":visible"))
+									$("#rhCanvasDiv").show("blind");
+							});
 						});
 					});
 				});
@@ -131,9 +137,9 @@ function updateGraphs(flight)
 {
 	var select = document.getElementById("timeSelect");
 	
-	graphP11Log(flight);
-	graphP11(flight);
-	graphP12(flight);
+	graphP11Log(flight, "red");
+	graphP11(flight, "red");
+	graphP12(flight, "green");
 	
 	$.ajax({
 		type: "POST",
@@ -143,18 +149,19 @@ function updateGraphs(flight)
 		dataType: "text"
 	});
 	
-	/*$.ajax({
+	$.ajax({
 		type: "POST",
-		url: "php/scripts/getLocationData.php",
+		url: "../php/getLocationData.php",
 		success: showLocationData,
-		data: {time: select.options[time].text},
+		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
-	});*/
+	});
 }
 
 function moveTimeLines()
 {
 	moveScatTimeLine(minTime);
+	moveAltTimeLine(minTime);
 	movePresTimeLine(minTime);
 	moveTempTimeLine(minTime);
 	moveRHTimeLine(minTime);
@@ -185,6 +192,9 @@ function showCoefficientData(output)
 
 function showLocationData(output)
 {
+	if(testOutput(output) < 0)
+		return;
+	
 	var data = output.split(",");
 	
 	var lat = data[0] + "&#176; " + data[1] + "&#39; "
