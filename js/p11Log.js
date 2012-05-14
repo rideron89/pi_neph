@@ -1,22 +1,21 @@
-function graphP11Log(flight)
+function graphP11Log(flight, color)
 {
 	var currentTime = document.getElementById("timeSelect").options[time].text;
 	
-	$.ajax({
-		type: "POST",
-		url: "../php/getP11Data.php",
-		data: {flight: flight, time: currentTime},
-		success: P11LogGraph,
-		dataType: "text"
-	});
+	var post = $.post("../php/getP11Data.php",
+		{flight: flight, time: currentTime});
+	
+	post.color = color;
+	
+	post.done(P11LogGraph);
 }
 
-function P11LogGraph(output)
+function P11LogGraph(output, statusText, jqxhr)
 {
 	var width = 640;
 	var height = 360;
 	var padding = 64;
-	var primaryColor = "red";
+	var primaryColor = jqxhr.color;
 	var secondaryColor = "black";
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;

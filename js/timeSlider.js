@@ -2,7 +2,7 @@ function updateSlider()
 {
 	document.getElementById("timeSelect").value = time;
 
-	updateGraphs();
+	updateGraphs(flight);
 }
 
 function updateSelect()
@@ -14,7 +14,7 @@ function updateSelect()
 	
 	document.getElementById("timeSelect").value = time;
 
-	updateGraphs();
+	updateGraphs(flight);
 }
 
 function updateDisplayTime()

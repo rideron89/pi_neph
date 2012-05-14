@@ -17,7 +17,7 @@ $(document).ready(function()
 	$("#minusButton").click(decrement);
 	$("#plusButton").click(increment);
 	
-	readTimes();
+	readTimes(flight);
 });
 
 /*
@@ -33,12 +33,12 @@ $(document).ajaxStop(function()
  * 
  * Get all the time values.
  */
-function readTimes()
+function readTimes(flight)
 {
 	$.ajax({
 		type: "POST",
 		url: "../php/getTimes.php",
-		data: {flight: "t01"},
+		data: {flight: flight},
 		success: saveTimes,
 		dataType: "text"
 	});
@@ -67,12 +67,13 @@ function saveTimes(output)
 	$("#timeSlider").slider("option", "max",
 		document.getElementById("timeSelect").length - 1);
 	
-	graphP11Log("t01");
-	graphP11("t01");
-	graphScat("t01");
-	graphPres("t01");
-	graphTemp("t01");
-	graphRH("t01");
+	graphP11Log(flight, "red");
+	graphP11(flight, "red");
+	graphP12(flight, "green");
+	graphScat(flight, minTime, "blue");
+	graphPres(flight, minTime, "orange");
+	graphTemp(flight, minTime, "yellow");
+	graphRH(flight, minTime, "green", "orange", "purple");
 	
 	drawGraphs();
 	
@@ -80,7 +81,7 @@ function saveTimes(output)
 		type: "POST",
 		url: "../php/getCoefficientData.php",
 		success: showCoefficientData,
-		data: {flight: "t01", time: select.options[time].text},
+		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
 	});
 	
@@ -95,14 +96,17 @@ function saveTimes(output)
 
 function drawGraphs()
 {
-	$.fx.speeds._default = 175;
+	$.fx.speeds._default = 125;
 	
 	// draw the graphs
 	if(!$("#p11LogCanvasDiv").is(":visible"))
 		$("#p11LogCanvasDiv").show("blind", function()
+	{
+		if(!$("#p11CanvasDiv").is(":visible"))
+			$("#p11CanvasDiv").show("blind", function()
 		{
-			if(!$("#p11CanvasDiv").is(":visible"))
-				$("#p11CanvasDiv").show("blind", function()
+			if(!$("#p12CanvasDiv").is(":visible"))
+				$("#p12CanvasDiv").show("blind", function()
 			{
 				if(!$("#scatCanvasDiv").is(":visible"))
 					$("#scatCanvasDiv").show("blind", function()
@@ -119,21 +123,23 @@ function drawGraphs()
 					});
 				});
 			});
+		});
 	});
 }
 
-function updateGraphs()
+function updateGraphs(flight)
 {
 	var select = document.getElementById("timeSelect");
 	
-	graphP11Log("t01");
-	graphP11("t01");
+	graphP11Log(flight);
+	graphP11(flight);
+	graphP12(flight);
 	
 	$.ajax({
 		type: "POST",
 		url: "../php/getCoefficientData.php",
 		success: showCoefficientData,
-		data: {flight: "t01", time: select.options[time].text},
+		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
 	});
 	
@@ -148,10 +154,10 @@ function updateGraphs()
 
 function moveTimeLines()
 {
-	moveScatTimeLine();
-	movePresTimeLine();
-	moveTempTimeLine();
-	moveRHTimeLine();
+	moveScatTimeLine(minTime);
+	movePresTimeLine(minTime);
+	moveTempTimeLine(minTime);
+	moveRHTimeLine(minTime);
 }
 
 function showCoefficientData(output)

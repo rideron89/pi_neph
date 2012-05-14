@@ -1,26 +1,28 @@
-function graphRH(flight, color)
+function graphRH(flight, minTime, rh1Color, rh2Color, rh3Color)
 {
 	var post = $.post("../php/getRHData.php",
 		{flight: flight});
 	
-	if(!color)
-		post.color = "yellow";
-	else
-		post.color = color;
+	post.minTime = minTime
+	post.rh1Color = rh1Color;
+	post.rh2Color = rh2Color;
+	post.rh3Color = rh3Color;
 	
 	post.done(RHGraph);
 }
 
-function moveRHTimeLine()
+function moveRHTimeLine(minTime)
 {
 	var x;
 	var timeLine = document.getElementById("rhTimeLine");
 	var times = document.getElementById("timeSelect");
 	var width = 640;
 	var padding = 64;
+	var maxTime = minTime + 9;
 
 	x = width - (padding * 2);
-	x = x / 9000 * (times.options[time].text - 66000);
+	x = x / ((maxTime - minTime + 1) * 1000) *
+		(times.options[time].text - (minTime * 1000));
 	x = x + padding;
 
 	timeLine.style.left = x + "px";
@@ -31,14 +33,15 @@ function RHGraph(output, statusText, jqxhr)
 	var width = 640;
 	var height = 360;
 	var padding = 64;
-	var primaryColor = jqxhr.color;
 	var secondaryColor = "black";
-	var rh1Color = "green";
-	var rh2Color = "orange";
-	var rh3Color = "purple";
+	var rh1Color = jqxhr.rh1Color;
+	var rh2Color = jqxhr.rh2Color;
+	var rh3Color = jqxhr.rh3Color;
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;
 	var largestY = 80;
+	var minTime = jqxhr.minTime;
+	var maxTime = minTime + 9;
 	
 	var data = output.split("+");
 	var rh1Data = data[0].split(",");
@@ -193,20 +196,20 @@ function RHGraph(output, statusText, jqxhr)
 		context.font = "bold 11pt sans-serif";
 		context.lineWidth = 1;
 		
-		for(var i = 0; i < 10; i++)
+		for(var i = 0; i < 11; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9 * i;
+			x = x / 10 * i;
 			x = x + padding;
 			
-			text = parseInt(66 + (1 * i)) + "k";
+			text = parseInt(minTime + (1 * i)) + "k";
 			
 			context.globalAlpha = alphaHigh;
 			context.fillText(text, (x - context.measureText(text).width / 2),
 				(height - padding + 20));
 			
 			context.globalAlpha = 0.6;
-			text = secondsToCalendarHHMM(parseInt(66 + (1 * i)) * 1000);
+			text = secondsToCalendarHHMM(parseInt(minTime + (1 * i)) * 1000);
 			context.fillText(text, (x - context.measureText(text).width / 2),
 				(height-  padding + 35));
 		
@@ -242,7 +245,8 @@ function RHGraph(output, statusText, jqxhr)
 		var times = document.getElementById("timeSelect");
 		
 		x = width - (padding * 2);
-		x = x / 9000 * (times.options[0].text - 66000);
+		x = x / ((maxTime - minTime + 1) * 1000) *
+			(times.options[0].text - (minTime * 1000));
 		x = x + padding;
 		
 		timeLine.style.left = x + "px";
@@ -261,7 +265,8 @@ function RHGraph(output, statusText, jqxhr)
 		for(var i = 0; i < rh1Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9000 * (times.options[i].text - 66000);
+			x = x / ((maxTime - minTime + 1) * 1000) *
+				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
 			y = height - (padding * 2);
@@ -287,7 +292,8 @@ function RHGraph(output, statusText, jqxhr)
 		for(i = 0; i < rh2Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9000 * (times.options[i].text - 66000);
+			x = x / ((maxTime - minTime + 1) * 1000) *
+				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
 			y = height - (padding * 2);
@@ -313,7 +319,8 @@ function RHGraph(output, statusText, jqxhr)
 		for(i = 0; i < rh3Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9000 * (times.options[i].text - 66000);
+			x = x / ((maxTime - minTime + 1) * 1000) *
+				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
 			y = height - (padding * 2);

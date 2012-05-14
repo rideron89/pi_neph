@@ -1,28 +1,28 @@
-function graphP11(flight, color)
+function graphP12(flight, color)
 {
 	var currentTime = document.getElementById("timeSelect").options[time].text;
 	
-	var post = $.post("../php/getP11Data.php",
+	var post = $.post("../php/getP12Data.php",
 		{flight: flight, time: currentTime});
 	
 	post.color = color;
 	
-	post.done(P11Graph);
+	post.done(P12Graph);
 }
 
-function P11Graph(output)
+function P12Graph(output)
 {
 	var width = 640;
 	var height = 360;
 	var padding = 64;
-	var primaryColor = "red";
+	var primaryColor = "green";
 	var secondaryColor = "black";
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;
 	
 	var data = output.split(",");
-	var graph = document.getElementById("p11Graph");
-	var dataPoints = document.getElementById("p11DataPoints");
+	var graph = document.getElementById("p12Graph");
+	var dataPoints = document.getElementById("p12DataPoints");
 	var context = null;
 	
 	var setupGraph = function()
@@ -63,16 +63,16 @@ function P11Graph(output)
 	
 	var updateTitle = function()
 	{
-		var title = document.getElementById("p11CanvasTitle");
-		var xAxis = document.getElementById("p11XAxisTitle");
-		var yAxis = document.getElementById("p11YAxisTitle");
-
-		title.innerHTML = "P11, aerosol only phase function, from 2 ";
-		title.innerHTML += "to 176 degrees, by 1 degree, at 532 nm";
+		var title = document.getElementById("p12CanvasTitle");
+		var xAxis = document.getElementById("p12XAxisTitle");
+		var yAxis = document.getElementById("p12YAxisTitle");
 		
+		title.innerHTML = "-P12/P11, aerosol only degree of linear ";
+		title.innerHTML += "polarization, from 2 to 176 degrees, by 1 degree ";
+		title.innerHTML += "at 532 nm";
 		
 		xAxis.innerHTML = "Scattering Angle [degrees]";
-		yAxis.innerHTML = "P11 Phase Function [unitless]";
+		yAxis.innerHTML = "-P12/P11 Phase Function [unitless]";
 	};
 	
 	var drawAxes = function()

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>B200 Test Flight (T01)</title>
+        <title>Spirals: LaRC, Wallops, COVE (R01)</title>
 		
 		<link href="../style/ui/theme.css" rel="stylesheet"
 			  type="text/css" />
@@ -13,8 +13,8 @@
 		<link href="../style/t01.css" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript">
-			var flight = "t01";
-			var minTime = 66;
+			var flight = "r01";
+			var minTime = 43;
 		</script>
 		
 		<script src="../js/jquery/jquery.js"></script>
@@ -38,7 +38,7 @@
 				Back
 			</a>
 			
-			B200 Test Flight (T01)
+			Spirals: LaRC, Wallops, COVE (R01)
 		</span>
 		
 		<div id="pinnedDataBox">

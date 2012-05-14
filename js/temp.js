@@ -1,26 +1,26 @@
-function graphTemp(flight, color)
+function graphTemp(flight, minTime, color)
 {
 	var post = $.post("../php/getScatData.php",
 		{flight: flight, request: "temperature"});
 	
-	if(!color)
-		post.color = "yellow";
-	else
-		post.color = color;
+	post.minTime = minTime
+	post.color = color;
 	
 	post.done(TempGraph);
 }
 
-function moveTempTimeLine()
+function moveTempTimeLine(minTime)
 {
 	var x;
 	var timeLine = document.getElementById("tempTimeLine");
 	var times = document.getElementById("timeSelect");
 	var width = 640;
 	var padding = 64;
+	var maxTime = minTime + 9;
 
 	x = width - (padding * 2);
-	x = x / 9000 * (times.options[time].text - 66000);
+	x = x / ((maxTime - minTime + 1) * 1000) *
+		(times.options[time].text - (minTime * 1000));
 	x = x + padding;
 
 	timeLine.style.left = x + "px";
@@ -36,6 +36,8 @@ function TempGraph(output, statusText, jqxhr)
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;
 	var largestY = 40;
+	var minTime = jqxhr.minTime;
+	var maxTime = minTime + 9;
 
 	var data = output.split(",");
 	var graph = document.getElementById("tempGraph");
@@ -112,20 +114,20 @@ function TempGraph(output, statusText, jqxhr)
 		context.font = "bold 11pt sans-serif";
 		context.lineWidth = 1;
 		
-		for(var i = 0; i < 10; i++)
+		for(var i = 0; i < 11; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9 * i;
+			x = x / 10 * i;
 			x = x + padding;
 			
-			text = parseInt(66 + (1 * i)) + "k";
+			text = parseInt(minTime + (1 * i)) + "k";
 			
 			context.globalAlpha = alphaHigh;
 			context.fillText(text, (x - context.measureText(text).width / 2),
 				(height - padding + 20));
 			
 			context.globalAlpha = 0.6;
-			text = secondsToCalendarHHMM(parseInt(66 + (1 * i)) * 1000);
+			text = secondsToCalendarHHMM(parseInt(minTime + (1 * i)) * 1000);
 			context.fillText(text, (x - context.measureText(text).width / 2),
 				(height-  padding + 35));
 		
@@ -161,7 +163,8 @@ function TempGraph(output, statusText, jqxhr)
 		var times = document.getElementById("timeSelect");
 		
 		x = width - (padding * 2);
-		x = x / 9000 * (times.options[0].text - 66000);
+		x = x / ((maxTime - minTime + 1) * 1000) *
+			(times.options[0].text - (minTime * 1000));
 		x = x + padding;
 		
 		timeLine.style.left = x + "px";
@@ -181,7 +184,8 @@ function TempGraph(output, statusText, jqxhr)
 		for(var i = 0; i < data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / 9000 * (times.options[i].text - 66000);
+			x = x / ((maxTime - minTime + 1) * 1000) *
+				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
 			y = height - (padding * 2);
