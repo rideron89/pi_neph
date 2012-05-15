@@ -47,11 +47,8 @@ function readTimes(flight)
 
 function saveTimes(output)
 {
-	if(output[0] == "!")
-	{
-		document.getElementById("errorInfoDiv").innerHTML = output;
-		return;
-	}
+	if(testOutput(output) < 0)
+		return
 	
 	var times = output.split(",");
 	var select = document.getElementById("timeSelect");
@@ -169,6 +166,9 @@ function moveTimeLines()
 
 function showCoefficientData(output)
 {
+	if(testOutput(output) < 0)
+		return;
+	
 	var data = output.split(",");
 	
 	var calendar = secondsToCalendar(data[2]);

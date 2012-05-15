@@ -18,7 +18,7 @@
 			var minTime = 43;
 		</script>
 		
-		<script src="../js/jquery/jquery.js"></script>
+		<!--<script src="../js/jquery/jquery.js"></script>
 		<script src="../js/jquery/jqueryui.js"></script>
 		<script src="../js/utils.js"></script>
 		<script src="../js/timeSlider.js"></script>
@@ -31,7 +31,7 @@
 		<script src="../js/alt.js"></script>
 		<script src="../js/pres.js"></script>
 		<script src="../js/temp.js"></script>
-		<script src="../js/rh.js"></script>
+		<script src="../js/rh.js"></script>-->
 	</head>
 	<body>
 		
@@ -212,5 +212,10 @@
 				<canvas id="rhLegend" class="legend"></canvas>
 			</div>
 		</div> <!-- canvasBox -->
+		
+		<script src="../js/load.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			load();
+		</script>
 	</body>
 </html>

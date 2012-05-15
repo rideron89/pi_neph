@@ -58,7 +58,9 @@ function warningMessage(message)
 
 function mysqlError(message)
 {
-	if(message.indexOf("[1045]") != -1)
+	if(message.indexOf("[1044]") != -1)
+		message = "User access denied to database.";
+	else if(message.indexOf("[1045]") != -1)
 		message = "Access denied to database.";
 	else if(message.indexOf("[1054]") != -1)
 		message = "Attempted to read from unknown column.";
