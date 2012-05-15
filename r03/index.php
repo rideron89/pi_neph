@@ -3,38 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Jackson Transit (R03)</title>
-		
-		<link href="../style/ui/theme.css" rel="stylesheet"
-			  type="text/css" />
-		<link href="../style/general.css" rel="stylesheet" type="text/css" />
-		<link href="../style/pinnedDataBox.css" rel="stylesheet"
-			  type="text/css" />
-		<link href="../style/toc.css" rel="stylesheet" type="text/css" />
-		<link href="../style/graph.css" rel="stylesheet" type="text/css" />
-		<link href="../style/t01.css" rel="stylesheet" type="text/css" />
-		
-		<script type="text/javascript">
-			var flight = "r03";
-			var minTime = 43;
-		</script>
-		
-		<!--<script src="../js/jquery/jquery.js"></script>
-		<script src="../js/jquery/jqueryui.js"></script>
-		<script src="../js/utils.js"></script>
-		<script src="../js/timeSlider.js"></script>
-		<script src="../js/toc.js"></script>
-		<script src="../js/main.js"></script>
-		<script src="../js/p11Log.js"></script>
-		<script src="../js/p11.js"></script>
-		<script src="../js/p12.js"></script>
-		<script src="../js/scat.js"></script>
-		<script src="../js/alt.js"></script>
-		<script src="../js/pres.js"></script>
-		<script src="../js/temp.js"></script>
-		<script src="../js/rh.js"></script>-->
 	</head>
 	<body>
-		
 		
 		<span id="titleDiv">
 			<a id="backLink" class="buttonLink" href="..">
@@ -215,7 +185,10 @@
 		
 		<script src="../js/load.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			load();
+			var flight = "r03";
+			var minTime = 43;
+			
+			loadAll();
 		</script>
 	</body>
 </html>

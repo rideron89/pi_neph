@@ -1,61 +1,46 @@
-function load()
+function loadAll()
+{
+	loadCss("../style/ui/theme.css");
+	loadCss("../style/general.css");
+	loadCss("../style/pinnedDataBox.css");
+	loadCss("../style/toc.css");
+	loadCss("../style/graph.css");
+	
+	loadJs("../js/jquery/jquery.js");
+	loadJs("../js/jquery/jqueryui.js");
+	loadJs("../js/utils.js");
+	loadJs("../js/timeSlider.js");
+	loadJs("../js/toc.js");
+	loadJs("../js/main.js");
+	loadJs("../js/p11Log.js");
+	loadJs("../js/p11.js");
+	loadJs("../js/p12.js");
+	loadJs("../js/scat.js");
+	loadJs("../js/alt.js");
+	loadJs("../js/pres.js");
+	loadJs("../js/temp.js");
+	loadJs("../js/rh.js");
+}
+
+function loadCss(fileName)
 {
 	var head = document.getElementsByTagName("head")[0];
-	var script = null;
+	var script = document.createElement("link");
 	
-	script = document.createElement("script");
-	script.src = "../js/jquery/jquery.js";
+	script.setAttribute("rel", "stylesheet")
+	script.setAttribute("type", "text/css")
+	script.setAttribute("href", fileName)
+	
 	head.appendChild(script);
+}
+
+function loadJs(fileName)
+{
+	var head = document.getElementsByTagName("head")[0];
+	var script = document.createElement("script");
 	
-	script = document.createElement("script");
-	script.src = "../js/jquery/jqueryui.js";
-	head.appendChild(script);
+	script.setAttribute("type","text/javascript");
+	script.setAttribute("src", fileName);
 	
-	script = document.createElement("script");
-	script.src = "../js/utils.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/timeSlider.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/toc.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/main.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/p11Log.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/p11.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/p12.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/scat.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/alt.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/pres.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/temp.js";
-	head.appendChild(script);
-	
-	script = document.createElement("script");
-	script.src = "../js/rh.js";
 	head.appendChild(script);
 }
