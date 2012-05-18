@@ -1,0 +1,112 @@
+#pinnedDataBox
+{
+	position: fixed;
+	
+	z-index: 6;
+	
+	left: 40px;
+	top: 80px;
+	
+	display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: start;
+		-webkit-box-align: start;
+	
+	padding: 10px;
+	
+	border: 1px solid #666666;
+	border-radius: 6px 6px 0px 0px / 3px 3px 0px 0px;
+	
+	background: rgb(176,212,227); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(176,212,227,1) 0%, rgba(136,186,207,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,1) 100%); /* IE10+ */
+	background: linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#88bacf',GradientType=0 ); /* IE6-9 */
+	
+	-webkit-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+	
+	text-shadow: 1px 1px 3px #999999;
+	filter: dropshadow(color=#999999, offx=1, offy=1);
+}
+
+#timeSelectionBox, #timeInstanceBox
+{
+	display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: start;
+		-webkit-box-align: stretch;
+	
+	padding: 6px;
+	
+	border: 1px solid #666666;
+	border-radius: 6px 6px 6px 6px / 3px 3px 3px 3px;
+	
+	-webkit-box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+	box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+	
+	text-align: center;
+}
+
+#timeSliderDiv
+{
+	display: -webkit-box;
+		-webkit-box-orient: horizontal;
+		-webkit-box-pack: justify;
+		-webkit-box-align: center;
+	
+	margin-top: 10px;
+}
+
+#timeSlider
+{
+	width: 90px;
+}
+
+#dataInformationBox
+{
+	padding: 10px;
+	
+	line-height: 2.0;
+}
+
+#browserMessage
+{
+	width: 100%;
+
+	color: #333333;
+
+	font-size: 8pt;
+	font-style: italic;
+
+	text-align: center;
+}
+
+#loadingIconDiv
+{
+	margin-top: 10px;
+	margin-bottom: 5px;
+	
+	width: 100%;
+	
+	display: none;
+	
+	text-align: center;
+	
+	font-style: italic;
+}
+
+#errorInfoDiv
+{
+	color: #ef0000;
+}
+
+#warningInfoDiv
+{
+	color: #efef00;
+}

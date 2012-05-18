@@ -69,6 +69,7 @@ function saveTimes(output)
 	graphP11(flight, "red");
 	graphP12(flight, "green");
 	graphScat(flight, minTime, "blue");
+	buildMap();
 	graphAlt(flight, minTime, "purple");
 	graphPres(flight, minTime, "orange");
 	graphTemp(flight, minTime, "yellow");
@@ -110,20 +111,25 @@ function drawGraphs()
 				if(!$("#scatCanvasDiv").is(":visible"))
 					$("#scatCanvasDiv").show("blind", function()
 				{
-					if(!$("#altCanvasDiv").is(":visible"))
-						$("#altCanvasDiv").show("blind", function()
+					if($("#mapCanvasDiv").css("visibility") === "hidden")
 					{
-						if(!$("#presCanvasDiv").is(":visible"))
-							$("#presCanvasDiv").show("blind", function()
+						$("#mapCanvasDiv").css({visibility: "visible"});
+						
+						if(!$("#altCanvasDiv").is(":visible"))
+							$("#altCanvasDiv").show("blind", function()
 						{
-							if(!$("#tempCanvasDiv").is(":visible"))
-								$("#tempCanvasDiv").show("blind", function()
+							if(!$("#presCanvasDiv").is(":visible"))
+								$("#presCanvasDiv").show("blind", function()
 							{
-								if(!$("#rhCanvasDiv").is(":visible"))
-									$("#rhCanvasDiv").show("blind");
+								if(!$("#tempCanvasDiv").is(":visible"))
+									$("#tempCanvasDiv").show("blind", function()
+								{
+									if(!$("#rhCanvasDiv").is(":visible"))
+										$("#rhCanvasDiv").show("blind");
+								});
 							});
 						});
-					});
+					}
 				});
 			});
 		});

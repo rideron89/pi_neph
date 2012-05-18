@@ -143,6 +143,11 @@
 				<canvas id="scatTimeLine" class="timeLine"></canvas>
 			</div>
 			
+			<div id="mapCanvasDiv" class="canvasDiv">
+				<div id="mapTitle"></div>
+				<div id="mapCanvas"></div>
+			</div>
+			
 			<div id="altCanvasDiv" class="canvasDiv">
 				<div id="altCanvasTitle" class="canvasTitle"></div>
 				<div id="altYAxisTitle" class="yAxisTitle"></div>

@@ -16,6 +16,7 @@ function loadAll()
 	loadJs("../js/p11.js");
 	loadJs("../js/p12.js");
 	loadJs("../js/scat.js");
+	loadJs("../js/map.js");
 	loadJs("../js/alt.js");
 	loadJs("../js/pres.js");
 	loadJs("../js/temp.js");
