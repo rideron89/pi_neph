@@ -188,6 +188,7 @@
 				<canvas id="rhLegend" class="legend"></canvas>
 			</div>
 		</div> <!-- canvasBox -->
+		<script src="../js/jquery/jquery.js" type="text/javascript"></script>
 		<script src="../js/load.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			var flight = "r01";
