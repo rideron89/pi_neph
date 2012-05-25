@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Spirals: LaRC, Wallops, COVE (R01)</title>
+        <title>CALIPSO: Eastern (R02)</title>
 		<link href="../style/ui/theme.css" rel="stylesheet" type="text/css" />
 		<link href="../style/general.css" rel="stylesheet" type="text/css" />
 		<link href="../style/pinnedDataBox.css" rel="stylesheet" type="text/css" />
@@ -11,19 +11,17 @@
 		<script src="../js/jquery/jquery.js" type="text/javascript"></script>
 		<script src="../js/jquery/jqueryui.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			var flight = "r01";
-			var minTime = 43;
+			var flight = "r02";
+			var minTime = 62;
 		</script>
 	</head>
 	<body>
-		
-		
 		<span id="titleDiv">
 			<a id="backLink" class="buttonLink" href="..">
 				Back
 			</a>
 			
-			Spirals: LaRC, Wallops, COVE (R01)
+			CALIPSO: Eastern (R02)
 		</span>
 		
 		<div id="pinnedDataBox">

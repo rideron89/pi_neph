@@ -2,9 +2,11 @@ function buildMap()
 {
 	var script = document.createElement("script");
 	
+	var key = "AIzaSyC_q7JqRFaWwHTgZQ_MTG4NuXuwlOAjdsg";
+	
 	script.type = "text/javascript";
 	script.src = "http://maps.googleapis.com/maps/api/js?";
-	script.src += "key=AIzaSyDbxQ8vk0UAdJczjDvDlVnt3q6_ztpSsmc&";
+	script.src += "key=" + key + "&";
 	script.src += "sensor=true&callback=Map";
 	
 	document.body.appendChild(script);

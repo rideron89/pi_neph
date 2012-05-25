@@ -24,10 +24,17 @@
 			if(in_array($result["mid_utc"], $times))
 				$data .= $result["$request"] . ",";
 		
+		if($data == "")
+			throw new Exception("!$request data not present");
+		
 		echo $data;
 	}
 	catch(PDOException $e)
 	{
 		echo "!" . $e->getMessage();
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

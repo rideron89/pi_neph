@@ -47,11 +47,20 @@ function readTimes(flight)
 
 function saveTimes(output)
 {
-	if(testOutput(output) < 0)
-		return
-	
-	var times = output.split(",");
+	var test = testOutput(output);
+	var times = null;
 	var select = document.getElementById("timeSelect");
+	
+	if(test === -2) {
+		return;
+	}
+	else if(test === -1) {
+		times = output.split(",");
+		times.splice(0, 1);
+	}
+	else {
+		times = output.split(",");
+	}
 	
 	// save the times
 	for(var i = 0; i < times.length-1; i++)

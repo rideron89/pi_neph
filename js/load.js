@@ -7,7 +7,7 @@ function loadAll()
 	loadCss("../style/graph.css");
 	
 	//loadJs("../js/jquery/jquery.js");
-	loadJs("../js/jquery/jqueryui.js");
+	//loadJs("../js/jquery/jqueryui.js");
 	loadJs("../js/utils.js");
 	loadJs("../js/timeSlider.js");
 	loadJs("../js/toc.js");

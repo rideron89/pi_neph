@@ -16,7 +16,7 @@
 		$result = $statement->fetchObject();
 		
 		if(!$result)
-			throw new Exception("@Location table is empty!");
+			throw new Exception("!Location table is empty!");
 		
 		$data .= (float)$result->lat_deg . ",";
 		$data .= (float)$result->lat_min . ",";

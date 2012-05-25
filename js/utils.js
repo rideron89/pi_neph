@@ -1,11 +1,13 @@
 function testOutput(output)
 {
-	if(output[0] == "!")
+	output = output.split(",")[0];
+	
+	if(output[0] === "!")
 	{
 		errorMessage(mysqlError(output.substr(1)));
 		return -2;
 	}
-	else if(output[0] == "@")
+	else if(output[0] === "@")
 	{
 		warningMessage(output.substr(1));
 		return -1;
@@ -64,6 +66,8 @@ function mysqlError(message)
 		message = "Access denied to database.";
 	else if(message.indexOf("[1054]") != -1)
 		message = "Attempted to read from unknown column.";
+	else if(message.indexOf("1146") != -1)
+		message = "Attempted to access unknown table.";
 	
 	return message;
 }
