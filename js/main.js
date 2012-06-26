@@ -5,7 +5,7 @@ var time = 0;
  */
 $(document).ready(function()
 {
-	$("#tocItems").hide();
+	$("#toc_item_list").hide();
 	$("#loadingIconDiv").slideDown(400);
 	
 	$("#timeSlider").slider({

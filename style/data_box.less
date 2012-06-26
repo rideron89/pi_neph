@@ -1,0 +1,117 @@
+@import "vars.less";
+@import "general.less";
+
+#pinnedDataBox
+{
+	.pale-green_box;
+	
+	position: fixed;
+	
+	z-index: 10;
+	
+	left: 0px;
+	top: 0px;
+	
+	height: 100%;
+	
+	padding-top: 100px;
+	padding-left: 25px;
+	padding-right: 25px;
+	
+	border-top: 0;
+	border-left: 0;
+	border-bottom: 0;
+	
+	display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: start;
+		-webkit-box-align: start;
+}
+
+#timeSelectionBox, #timeInstanceBox
+{
+	.pale-green_rounded-box;
+
+	display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-box-pack: start;
+		-webkit-box-align: stretch;
+	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+	padding: 10px;
+	
+	text-align: center;
+}
+
+#timeSliderDiv
+{
+	display: -webkit-box;
+		-webkit-box-orient: horizontal;
+		-webkit-box-pack: justify;
+		-webkit-box-align: center;
+	
+	display: -moz-box;
+		-moz-box-orient: horizontal;
+		-moz-box-pack: justify;
+		-moz-box-align: center;
+	
+	display: box;
+		box-orient: horizontal;
+		box-pack: justify;
+		box-align: center;
+	
+	margin-top: 10px;
+}
+
+#timeSlider
+{
+	width: 90px;
+	
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#dataInformationBox
+{
+	padding: 10px;
+	
+	line-height: 2.0;
+}
+
+#browserMessage
+{
+	width: 100%;
+
+	color: #333333;
+
+	font-size: 8pt;
+	font-style: italic;
+
+	text-align: center;
+}
+
+#loadingIconDiv
+{
+	margin-top: 10px;
+	margin-bottom: 5px;
+	
+	width: 100%;
+	
+	display: none;
+	
+	text-align: center;
+	
+	font-style: italic;
+}
+
+#errorInfoDiv
+{
+	color: #ef0000;
+}
+
+#warningInfoDiv
+{
+	color: #EDD500;
+}
