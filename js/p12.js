@@ -1,8 +1,9 @@
 function graphP12(flight, color)
 {
 	var currentTime = document.getElementById("timeSelect").options[time].text;
+	var url = "/" + window.location.pathname.split('/')[1] + "/php/getP12Data.php";
 	
-	var post = $.post("../php/getP12Data.php",
+	var post = $.post(url,
 		{flight: flight, time: currentTime});
 	
 	post.color = color;

@@ -1,6 +1,8 @@
 function graphRH(flight, minTime, rh1Color, rh2Color, rh3Color)
 {
-	var post = $.post("../php/getRHData.php",
+	var url = "/" + window.location.pathname.split('/')[1] + "/php/getRHData.php";
+	
+	var post = $.post(url,
 		{flight: flight});
 	
 	post.minTime = minTime
@@ -337,14 +339,6 @@ function RHGraph(output, statusText, jqxhr)
 		
 		context.fill();
 		context.stroke();
-		/*rh1DataPoints.fill();
-		rh1DataPoints.stroke();
-		
-		rh2DataPoints.fill();
-		rh2DataPoints.stroke();
-		
-		rh3DataPoints.fill();
-		rh3DataPoints.stroke();*/
 	};
 	
 	setupGraph();

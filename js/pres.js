@@ -1,6 +1,8 @@
 function graphPres(flight, minTime, color)
 {
-	var post = $.post("../php/getScatData.php",
+	var url = "/" + window.location.pathname.split('/')[1] + "/php/getScatData.php";
+	
+	var post = $.post(url,
 		{flight: flight, request: "pressure"});
 	
 	post.minTime = minTime

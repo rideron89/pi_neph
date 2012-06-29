@@ -1,35 +1,72 @@
+<?php
+	if(!isset($_GET["flight"]))
+	{
+		$flight = "t01";
+	}
+	else
+	{
+		$flight = $_GET["flight"];
+	}
+	
+	if(strcmp("r01", $flight) == 0)
+		$flight_title = "Spirals: LaRC, Wallops, COVE";
+	else if(strcmp("r02", $flight) == 0)
+		$flight_title = "CALIPSO: Eastern";
+	else if(strcmp("r03", $flight) == 0)
+		$flight_title = "Jackson Transit";
+	else if(strcmp("r04", $flight) == 0)
+		$flight_title = "Jackson Local, CALIPSO & fires";
+	else if(strcmp("r05", $flight) == 0)
+		$flight_title = "UC12 to LaRC, B200 to AVL, Spiral: Tusc.";
+	else if(strcmp("r06", $flight) == 0)
+		$flight_title = "B200 to LaRC";
+	else if(strcmp("r07", $flight) == 0)
+		$flight_title = "Spirals: LaRC, Wallops, COVE";
+	else if(strcmp("r08", $flight) == 0)
+		$flight_title = "local fire: Spirals: LaRC, Wallops, COVE";
+	else if(strcmp("r09", $flight) == 0)
+		$flight_title = "Groton Transit, M.A.: Brookhaven";
+	else if(strcmp("r10", $flight) == 0)
+		$flight_title = "Groton Local #1, M.V., Th.F. & H.F.";
+	else if(strcmp("r11", $flight) == 0)
+		$flight_title = "Groton Local #2, M.V., Th.F. & H.F.";
+	else if(strcmp("r12", $flight) == 0)
+		$flight_title = "LaRC Transit, Spiral: Wallops";
+	else
+		$flight_title = "B200 Test Flight";
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<title>Spirals: LaRC, Wallops, COVE (R01)</title>
+	<title><?php echo $flight_title; ?></title>
 	
-	<link rel="stylesheet" type="text/css" href="../style/ui/jqueryui.css" />
-	<link rel="stylesheet/less" type="text/css" href="../style/main.less" />
+	<link rel="stylesheet" type="text/css" href="style/ui/jqueryui.css" />
+	<link rel="stylesheet/less" type="text/css" href="style/main.less" />
 	
-	<script type="text/javascript" src="../js/less.js"></script>
-	<script src="../js/jquery/jquery.js" type="text/javascript"></script>
-	<script src="../js/jquery/jqueryui.js" type="text/javascript"></script>
-	
+	<script type="text/javascript" src="js/less.js"></script>
+	<script type="text/javascript" src="js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery/jqueryui.js"></script>
+
 	<script type="text/javascript">
-		var flight = "r01";
+		var flight = "<?php echo $flight; ?>";
 		var minTime = 43;
 	</script>
 </head>
 <body>
 	
 	<div id="title_div">
-		<h2>Spirals: LaRC, Wallops, COVE (R01)</h2>
+		<h2><?php echo $flight_title . " (" . strtoupper($flight) . ")"; ?></h2>
 	</div>
 	
 	<div>
-		<a id="back_link" class="ui-button_link" href="..">Back</a>
+		<a id="back_link" class="ui-button_link" href="/pi_neph">Back</a>
 	</div>
 	
 	<div id="pinnedDataBox">
 		<div id="browserMessage">
-			Optimized for Chrome & Firefox
+			Optimized for Google Chrome
 		</div>
 		
 		<br />
@@ -53,15 +90,14 @@
 			
 			<div id="timeSelectDiv">
 				Mid time (UTC): 
-				<select id="timeSelect" class="ui-select_box" onchange="updateSelect()">
-				</select> 
+				<select id="timeSelect" class="ui-select_box" onchange="updateSelect()"></select> 
 				sec
 			</div>
 			
 		</div> <!-- timeSelectionBox -->
 		
 		<div id="loadingIconDiv">
-			<img src="../style/images/ajax-loader.gif" /><br />
+			<img src="style/images/ajax-loader.gif" /><br />
 			Data is loading...
 		</div>
 		
@@ -104,9 +140,6 @@
 			</button><br />
 			<button class="toc_item" onclick="tocItem('scatCanvasDiv')">
 				Linear Scattering Coefficient
-			</button><br />
-			<button class="toc_item" onclick="tocItem('mapCanvasDiv')">
-				Aircraft Path
 			</button><br />
 			<button class="toc_item" onclick="tocItem('altCanvasDiv')">
 				GPS Altitude
@@ -202,18 +235,18 @@
 		</div>
 	</div> <!-- canvasBox -->
 	
-	<script src="../js/utils.js"></script>
-	<script src="../js/timeSlider.js"></script>
-	<script src="../js/toc.js"></script>
-	<script src="../js/main.js"></script>
-	<script src="../js/p11Log.js"></script>
-	<script src="../js/p11.js"></script>
-	<script src="../js/p12.js"></script>
-	<script src="../js/scat.js"></script>
-	<script src="../js/map.js"></script>
-	<script src="../js/alt.js"></script>
-	<script src="../js/pres.js"></script>
-	<script src="../js/temp.js"></script>
-	<script src="../js/rh.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/timeSlider.js"></script>
+	<script src="js/toc.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/p11Log.js"></script>
+	<script src="js/p11.js"></script>
+	<script src="js/p12.js"></script>
+	<script src="js/scat.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/alt.js"></script>
+	<script src="js/pres.js"></script>
+	<script src="js/temp.js"></script>
+	<script src="js/rh.js"></script>
 </body>
 </html>

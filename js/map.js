@@ -16,7 +16,7 @@ function movePlaneMarker()
 {
 	var marker = null;
 	
-	//marker.setPosition(coords.getAt(time));
+	marker.setPosition(coords.getAt(time));
 }
 
 function Map()
@@ -62,9 +62,11 @@ function Map()
 	
 	function loadCoords()
 	{
+		var url = "/" + window.location.pathname.split('/')[1] + "/php/getCoordinates.php";
+		
 		$.ajax({
 			type: "POST",
-			url: "../php/getCoordinates.php",
+			url: url,
 			success: drawPath,
 			data: {flight: flight},
 			dataType: "text"
@@ -100,11 +102,13 @@ function Map()
 	
 	function setupMarker()
 	{
+		var url = "/" + window.location.pathname.split('/')[1] + "/style/images/aircraftsmall.png";
+		
 		marker = new google.maps.Marker({
 			position: coords.getAt(0),
 			map: map,
 			title: "Plane's Location",
-			icon: "../style/aircraftsmall.png"
+			icon: url
 		});
 	}
 	

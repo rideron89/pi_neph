@@ -1,6 +1,8 @@
 function graphAlt(flight, minTime, color)
 {
-	var post = $.post("../php/getAircraftData.php",
+	var url = "/" + window.location.pathname.split('/')[1] + "/php/getAircraftData.php";
+	
+	var post = $.post(url,
 		{flight: flight, request: "gps_altitude"});
 	
 	post.minTime = minTime

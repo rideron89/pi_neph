@@ -36,9 +36,11 @@ $(document).ajaxStop(function()
  */
 function readTimes(flight)
 {
+	var url = "/" + window.location.pathname.split('/')[1] + "/php/getTimes.php";
+	
 	$.ajax({
 		type: "POST",
-		url: "../php/getTimes.php",
+		url: url,
 		data: {flight: flight},
 		success: saveTimes,
 		dataType: "text"
@@ -50,6 +52,7 @@ function saveTimes(output)
 	var test = testOutput(output);
 	var times = null;
 	var select = document.getElementById("timeSelect");
+	var url = "/";
 	
 	if(test === -2) {
 		return;
@@ -86,17 +89,21 @@ function saveTimes(output)
 	
 	drawGraphs();
 	
+	url = "/" + window.location.pathname.split('/')[1] + "/php/getCoefficientData.php";
+	
 	$.ajax({
 		type: "POST",
-		url: "../php/getCoefficientData.php",
+		url: url,
 		success: showCoefficientData,
 		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
 	});
 	
+	url = "/" + window.location.pathname.split('/')[1] + "/php/getLocationData.php";
+	
 	$.ajax({
 		type: "POST",
-		url: "../php/getLocationData.php",
+		url: url,
 		success: showLocationData,
 		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
@@ -148,22 +155,27 @@ function drawGraphs()
 function updateGraphs(flight)
 {
 	var select = document.getElementById("timeSelect");
+	var url = "/";
 	
 	graphP11Log(flight, "red");
 	graphP11(flight, "red");
 	graphP12(flight, "green");
 	
+	url = "/" + window.location.pathname.split('/')[1] + "/php/getCoefficientData.php";
+	
 	$.ajax({
 		type: "POST",
-		url: "../php/getCoefficientData.php",
+		url: url,
 		success: showCoefficientData,
 		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
 	});
 	
+	url = "/" + window.location.pathname.split('/')[1] + "/php/getLocationData.php";
+	
 	$.ajax({
 		type: "POST",
-		url: "../php/getLocationData.php",
+		url: url,
 		success: showLocationData,
 		data: {flight: flight, time: select.options[time].text},
 		dataType: "text"
