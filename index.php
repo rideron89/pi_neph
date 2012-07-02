@@ -7,7 +7,7 @@
 	
 	<link rel="stylesheet/less" type="text/css" href="style/home.less" />
 	
-	<script type="text/javascript" src="js/less.js"></script>
+	<script type="text/javascript" src="js/lib/less.js"></script>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
 			<a id="r02Link" class="button_link" href="data.php?flight=r02">
 				CALIPSO: Eastern
 			</a>
-			<span class="data_status">Missing P11, P12, SCAT, LOCATION data</span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -54,7 +54,7 @@
 			<a id="r04Link" class="button_link" href="data.php?flight=r04">
 				Jackson Local, CALIPSO & fires
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status complete">All data found!</span>
 		</div>
 		
 		<div>
@@ -62,7 +62,7 @@
 			<a id="r05Link" class="button_link" href="data.php?flight=r05">
 				UC12 to LaRC, B200 to AVL, Spiral: Tusc.
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status complete">All data found!</span>
 		</div>
 		
 		<div>
@@ -70,7 +70,7 @@
 			<a id="r06Link" class="button_link" href="data.php?flight=r06">
 				B200 to LaRC
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status complete">All data found!</span>
 		</div>
 		
 		<div>
@@ -78,7 +78,7 @@
 			<a id="r07Link" class="button_link" href="data.php?flight=r07">
 				Spirals: LaRC, Wallops, COVE
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -86,7 +86,7 @@
 			<a id="r08Link" class="button_link" href="data.php?flight=r08">
 				local fire; Spirals: LaRC, Wallops, COVE
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -94,7 +94,7 @@
 			<a id="r09Link" class="button_link" href="data.php?flight=r09">
 				Groton Transit, M.A.: Brookhaven
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -102,7 +102,7 @@
 			<a id="r10Link" class="button_link" href="data.php?flight=r10">
 				Groton Local #1, M.V., Th.F & H.F.
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -110,7 +110,7 @@
 			<a id="r11Link" class="button_link" href="data.php?flight=r11">
 				Groton Local #2, M.V., Th.F & H.F.
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 		
 		<div>
@@ -118,7 +118,7 @@
 			<a id="r12Link" class="button_link" href="data.php?flight=r12">
 				LaRC Transit, Spiral: Wallops
 			</a>
-			<span class="data_status"></span>
+			<span class="data_status">Missing P11, P12, SCAT data</span>
 		</div>
 	</div>
 	

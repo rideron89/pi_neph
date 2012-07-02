@@ -25,19 +25,17 @@ function Map()
 	var options = null;
 	var styler = null;
 	
-	var startLat = 37.00;
-	var startLong = -75.50;
-	
 	var flightPath = null;
 	var coords = [];
+	var bounds = null;
 	var marker = null;
 	
 	var setupMap = function()
 	{
-		var map = document.getElementById("mapCanvas");
+		var canvas = document.getElementById("mapCanvas");
 		
-		map.style.width = "100%";
-		map.style.height = "100%";
+		canvas.style.width = "100%";
+		canvas.style.height = "100%";
 	};
 	
 	var initializeMap = function()
@@ -50,7 +48,7 @@ function Map()
 		}];
 		
 		options = {
-			center: new google.maps.LatLng(startLat, startLong),
+			center: new google.maps.LatLng(0, 0),
 			zoom: 8,
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 			styles: styler
@@ -79,6 +77,8 @@ function Map()
 		var lat = 0;
 		var lon = 0;
 		
+		bounds = new google.maps.LatLngBounds();
+		
 		flightPath = new google.maps.Polyline({
 			strokeColor: "#FF0000",
 			strokeOpacity: 1.0,
@@ -93,9 +93,12 @@ function Map()
 			lon = unparsedCoords[i].split("+")[1];
 			
 			coords.push(new google.maps.LatLng(lat, lon));
+			bounds.extend(new google.maps.LatLng(lat, lon));
 		}
 		
 		flightPath.setMap(map);
+		
+		map.fitBounds(bounds);
 		
 		setupMarker();
 	}

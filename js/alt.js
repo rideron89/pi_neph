@@ -37,7 +37,8 @@ function AltGraph(output, statusText, jqxhr)
 	var secondaryColor = "black";
 	var alphaHigh = 1.0;
 	var alphaLow = 0.2;
-	var largestY = 20;
+	var largestY = 30; // must be easily divisible by number_of_ticks
+	var number_of_ticks = 6;
 	var minTime = jqxhr.minTime;
 	var maxTime = minTime + 9;
 
@@ -138,13 +139,13 @@ function AltGraph(output, statusText, jqxhr)
 			context.lineTo(x, padding);
 		}
 		
-		for(i = 0; i < 11; i++)
+		for(i = 0; i < 7; i++)
 		{
 			y = height - (padding * 2);
-			y = y / 10 * i;
+			y = y / number_of_ticks * i;
 			y = y + padding;
 			
-			text = largestY - (i * 2) + "k";
+			text = largestY - (i * (largestY/number_of_ticks)) + "k";
 			
 			context.globalAlpha = alphaHigh;
 			context.fillText(text,

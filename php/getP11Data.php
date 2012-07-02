@@ -13,7 +13,7 @@
 		$statement->execute($param);
 		$result = $statement->fetch();
 		
-		for($i = 2; $i <= 176; $i++)
+		for($i = 3; $i <= 176; $i++)
 			$data .= $result["degree".$i] . ",";
 		
 		echo $data;

@@ -31,6 +31,9 @@
 		$data .= $result->rhOutlet . ",";
 		$data .= $result->temperature . ",";
 		
+		if($data == "")
+			throw new Exception ("@Coefficient table");
+		
 		echo $data;
 	}
 	catch(PDOException $e)

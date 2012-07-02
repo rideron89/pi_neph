@@ -9,31 +9,83 @@
 	}
 	
 	if(strcmp("r01", $flight) == 0)
+	{
 		$flight_title = "Spirals: LaRC, Wallops, COVE";
+		$flight_time_start = 44;
+		$flight_time_end = 53;
+	}
 	else if(strcmp("r02", $flight) == 0)
+	{
 		$flight_title = "CALIPSO: Eastern";
+		$flight_time_start = 62;
+		$flight_time_end = 72;
+	}
 	else if(strcmp("r03", $flight) == 0)
+	{
 		$flight_title = "Jackson Transit";
+		$flight_time_start = 43;
+		$flight_time_end = 53;
+	}
 	else if(strcmp("r04", $flight) == 0)
+	{
 		$flight_title = "Jackson Local, CALIPSO & fires";
+		$flight_time_start = 66;
+		$flight_time_end = 76;
+	}
 	else if(strcmp("r05", $flight) == 0)
+	{
 		$flight_title = "UC12 to LaRC, B200 to AVL, Spiral: Tusc.";
+		$flight_time_start = 54;
+		$flight_time_end = 65;
+	}
 	else if(strcmp("r06", $flight) == 0)
+	{
 		$flight_title = "B200 to LaRC";
+		$flight_time_start = 67;
+		$flight_time_end = 76;
+	}
 	else if(strcmp("r07", $flight) == 0)
+	{
 		$flight_title = "Spirals: LaRC, Wallops, COVE";
+		$flight_time_start = 0;
+		$flight_time_start = 0;
+	}
 	else if(strcmp("r08", $flight) == 0)
+	{
 		$flight_title = "local fire: Spirals: LaRC, Wallops, COVE";
+		$flight_time_start = 0;
+		$flight_time_end = 0;
+	}
 	else if(strcmp("r09", $flight) == 0)
+	{
 		$flight_title = "Groton Transit, M.A.: Brookhaven";
+		$flight_time_start = 0;
+		$flight_time_end = 0;
+	}
 	else if(strcmp("r10", $flight) == 0)
+	{
 		$flight_title = "Groton Local #1, M.V., Th.F. & H.F.";
+		$flight_time_start = 0;
+		$flight_time_end = 0;
+	}
 	else if(strcmp("r11", $flight) == 0)
+	{
 		$flight_title = "Groton Local #2, M.V., Th.F. & H.F.";
+		$flight_time_start = 0;
+		$flight_time_end = 0;
+	}
 	else if(strcmp("r12", $flight) == 0)
+	{
 		$flight_title = "LaRC Transit, Spiral: Wallops";
-	else
+		$flight_time_start = 0;
+		$flight_time_end = 0;
+	}
+	else // t01
+	{
 		$flight_title = "B200 Test Flight";
+		$flight_time_start = 66;
+		$flight_time_end = 75;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,14 +97,26 @@
 	<link rel="stylesheet" type="text/css" href="style/ui/jqueryui.css" />
 	<link rel="stylesheet/less" type="text/css" href="style/main.less" />
 	
-	<script type="text/javascript" src="js/less.js"></script>
-	<script type="text/javascript" src="js/jquery/jquery.js"></script>
-	<script type="text/javascript" src="js/jquery/jqueryui.js"></script>
-
+	<script type="text/javascript" src="js/lib/less.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/jqueryui.js"></script>
+	
+	<script type="text/javascript" src="js/lib/head.js"></script>
+	
 	<script type="text/javascript">
-		var flight = "<?php echo $flight; ?>";
-		var minTime = 43;
+		head.js("js/utils.js", "js/timeSlider.js", "js/toc.js", "js/main.js", "js/p11Log.js", "js/p11.js", "js/p12.js", "js/scat.js",
+			"js/map.js", "js/alt.js", "js/pres.js", "js/temp.js", "js/rh.js");
 	</script>
+	
+	<?php
+	
+		echo "<script type=\"text/javascript\">";
+		echo "var flight = \"" . $flight . "\";";
+		echo "var minTime = parseInt(" . $flight_time_start . ");";
+		echo "var maxTime = parseInt(" . $flight_time_end . ");";
+		echo "</script>";
+	
+	?>
 </head>
 <body>
 	
@@ -234,19 +298,5 @@
 			<canvas id="rhLegend" class="legend"></canvas>
 		</div>
 	</div> <!-- canvasBox -->
-	
-	<script src="js/utils.js"></script>
-	<script src="js/timeSlider.js"></script>
-	<script src="js/toc.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/p11Log.js"></script>
-	<script src="js/p11.js"></script>
-	<script src="js/p12.js"></script>
-	<script src="js/scat.js"></script>
-	<script src="js/map.js"></script>
-	<script src="js/alt.js"></script>
-	<script src="js/pres.js"></script>
-	<script src="js/temp.js"></script>
-	<script src="js/rh.js"></script>
 </body>
 </html>

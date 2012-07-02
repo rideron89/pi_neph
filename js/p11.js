@@ -185,10 +185,18 @@ function P11Graph(output)
 		context.stroke();
 	};
 	
-	setupGraph();
-	clearGraph();
-	drawBorder();
-	updateTitle();
-	drawAxes();
-	plotPoints();
+	if(data[0][0] === "!") {
+		errorMessage(data[0].substr(1));
+	}
+	else if(data[0][0] === "@") {
+		warningMessage(data[0].substr(1));
+	}
+	else {
+		setupGraph();
+		clearGraph();
+		drawBorder();
+		updateTitle();
+		drawAxes();
+		plotPoints();
+	}
 }
