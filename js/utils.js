@@ -55,7 +55,9 @@ function errorMessage(message)
 
 function warningMessage(message)
 {
-	document.getElementById("warningInfoDiv").innerHTML += message + "<br />";
+	// document.getElementById("warningInfoDiv").innerHTML += message + "<br />";
+	if($("#warningInfoDiv").html().indexOf(message) == -1)
+		$("#warningInfoDiv").append(message + "<br />");
 }
 
 function mysqlError(message)

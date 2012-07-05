@@ -17,7 +17,8 @@ function buildMap()
 
 function movePlaneMarker()
 {
-	marker.setPosition(coords.getAt(time));
+	if(marker != null && coords.length > 0)
+		marker.setPosition(coords.getAt(time));
 }
 
 function Map()
@@ -117,4 +118,7 @@ function Map()
 	setupMap();
 	initializeMap();
 	loadCoords();
+	
+	if($("#mapCanvasDiv").css("visibility") === "hidden")
+		$("#mapCanvasDiv").css({visibility: "visible"});
 }

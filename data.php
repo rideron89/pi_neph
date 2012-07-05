@@ -11,7 +11,7 @@
 	if(strcmp("r01", $flight) == 0)
 	{
 		$flight_title = "Spirals: LaRC, Wallops, COVE";
-		$flight_time_start = 44;
+		$flight_time_start = 43;
 		$flight_time_end = 53;
 	}
 	else if(strcmp("r02", $flight) == 0)
@@ -48,7 +48,7 @@
 	{
 		$flight_title = "Spirals: LaRC, Wallops, COVE";
 		$flight_time_start = 64;
-		$flight_time_end = 74;
+		$flight_time_end = 75;
 	}
 	else if(strcmp("r08", $flight) == 0)
 	{
@@ -123,7 +123,7 @@
 	
 	<div id="pinnedDataBox">
 		<div id="browserMessage">
-			Optimized for Google Chrome
+			Optimized for Chrome & Firefox
 		</div>
 		
 		<br />

@@ -13,6 +13,9 @@
 		$statement->execute($param);
 		$result = $statement->fetch();
 		
+		if(!$result)
+			throw new Exception("@P11 data could not be loaded!");
+		
 		for($i = 3; $i <= 176; $i++)
 			$data .= $result["degree".$i] . ",";
 		
@@ -21,5 +24,9 @@
 	catch(PDOException $e)
 	{
 		echo ("!" . $e->getMessage());
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

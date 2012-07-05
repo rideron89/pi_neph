@@ -160,18 +160,24 @@ function P11LogGraph(output, statusText, jqxhr)
 		context.stroke();
 	};
 	
-	if(data[0][0] === "!") {
+	if(data[0][0] === "!")
+	{
 		errorMessage(data[0].substr(1));
 	}
-	else if(data[0][0] === "@") {
+	else if(data[0][0] === "@")
+	{
 		warningMessage(data[0].substr(1));
 	}
-	else {
+	else
+	{
 		setupGraph();
 		clearGraph();
 		drawBorder();
 		updateTitle();
 		drawAxes();
 		plotPoints();
+		
+		if(!$("#p11LogCanvasDiv").is(":visible"))
+			$("#p11LogCanvasDiv").show("blind", 500);
 	}
 }

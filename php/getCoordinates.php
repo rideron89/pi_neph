@@ -33,10 +33,17 @@
 			}
 		}
 		
+		if($data == "")
+			throw new Exception("@Coordinates could not be loaded!");
+		
 		echo $data;
 	}
 	catch(PDOException $e)
 	{
 		echo ("!" . $e->getMessage());
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

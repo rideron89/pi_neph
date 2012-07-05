@@ -7,8 +7,10 @@
 	 * As a backup measure (database could not be found), read the times from
 	 * a text file.
 	 */
-	function readFromFile($flight) {
-		try {
+	function readFromFile($flight)
+	{
+		try
+		{
 			$flight = $_POST["flight"];
 			$filePath = "../$flight/times.ict";
 
@@ -27,12 +29,14 @@
 			echo "@Read times from backup,";
 			echo $times;
 		}
-		catch(Exception $e) {
+		catch(Exception $e)
+		{
 			echo $e->getMessage();
 		}
 	}
 	
-	try {
+	try
+	{
 		$flight = "devote_" . $_POST["flight"];
 		$data = "";
 		
@@ -41,7 +45,8 @@
 		$statement = $con->prepare($query);
 		$statement->execute();
 		
-		while($result = $statement->fetchObject()) {
+		while($result = $statement->fetchObject())
+		{
 			$data .= $result->mid_utc . ",";
 		}
 		
@@ -54,6 +59,6 @@
 		echo "!" . $e->getMessage();
 	}
 	catch(Exception $e) {
-		readFromFile($e->getMessage());
+		echo readFromFile($e->getMessage());
 	}
 ?>

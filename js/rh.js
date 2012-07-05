@@ -1,11 +1,12 @@
-function graphRH(flight, minTime, rh1Color, rh2Color, rh3Color)
+function graphRH(flight, minTime, maxTime, rh1Color, rh2Color, rh3Color)
 {
 	var url = "/" + window.location.pathname.split('/')[1] + "/php/getRHData.php";
 	
 	var post = $.post(url,
 		{flight: flight});
 	
-	post.minTime = minTime
+	post.minTime = minTime;
+	post.maxTime = maxTime;
 	post.rh1Color = rh1Color;
 	post.rh2Color = rh2Color;
 	post.rh3Color = rh3Color;
@@ -13,17 +14,16 @@ function graphRH(flight, minTime, rh1Color, rh2Color, rh3Color)
 	post.done(RHGraph);
 }
 
-function moveRHTimeLine(minTime)
+function moveRHTimeLine(minTime, maxTime)
 {
 	var x;
 	var timeLine = document.getElementById("rhTimeLine");
 	var times = document.getElementById("timeSelect");
 	var width = 640;
 	var padding = 64;
-	var maxTime = minTime + 9;
 
 	x = width - (padding * 2);
-	x = x / ((maxTime - minTime + 1) * 1000) *
+	x = x / ((maxTime - minTime) * 1000) *
 		(times.options[time].text - (minTime * 1000));
 	x = x + padding;
 
@@ -43,12 +43,12 @@ function RHGraph(output, statusText, jqxhr)
 	var alphaLow = 0.2;
 	var largestY = 80;
 	var minTime = jqxhr.minTime;
-	var maxTime = minTime + 9;
+	var maxTime = jqxhr.maxTime;
 	
 	var data = output.split("+");
-	var rh1Data = data[0].split(",");
-	var rh2Data = data[1].split(",");
-	var rh3Data = data[2].split(",");
+	var rh1Data = null;
+	var rh2Data = null;
+	var rh3Data = null;
 	var graph = document.getElementById("rhGraph");
 	var rh1DataPoints = document.getElementById("rh1DataPoints");
 	var rh2DataPoints = document.getElementById("rh2DataPoints");
@@ -56,8 +56,6 @@ function RHGraph(output, statusText, jqxhr)
 	var timeLine = document.getElementById("rhTimeLine");
 	var legend = document.getElementById("rhLegend");
 	var context = null;
-	
-	data = ""; // maybe clear up some memory?
 	
 	var setupGraph = function()
 	{
@@ -198,10 +196,10 @@ function RHGraph(output, statusText, jqxhr)
 		context.font = "bold 11pt sans-serif";
 		context.lineWidth = 1;
 		
-		for(var i = 0; i < 11; i++)
+		for(var i = 0; i < (maxTime - minTime + 1); i++)
 		{
 			x = width - (padding * 2);
-			x = x / 10 * i;
+			x = x / (maxTime - minTime) * i;
 			x = x + padding;
 			
 			text = parseInt(minTime + (1 * i)) + "k";
@@ -247,7 +245,7 @@ function RHGraph(output, statusText, jqxhr)
 		var times = document.getElementById("timeSelect");
 		
 		x = width - (padding * 2);
-		x = x / ((maxTime - minTime + 1) * 1000) *
+		x = x / ((maxTime - minTime) * 1000) *
 			(times.options[0].text - (minTime * 1000));
 		x = x + padding;
 		
@@ -264,10 +262,14 @@ function RHGraph(output, statusText, jqxhr)
 		context.fillStyle = rh1Color;
 		context.lineWidth = 1;
 		
+		rh1Data = data[0].split(",");
+		rh2Data = data[1].split(",");
+		rh3Data = data[2].split(",");
+		
 		for(var i = 0; i < rh1Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / ((maxTime - minTime + 1) * 1000) *
+			x = x / ((maxTime - minTime) * 1000) *
 				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
@@ -294,7 +296,7 @@ function RHGraph(output, statusText, jqxhr)
 		for(i = 0; i < rh2Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / ((maxTime - minTime + 1) * 1000) *
+			x = x / ((maxTime - minTime) * 1000) *
 				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
@@ -321,7 +323,7 @@ function RHGraph(output, statusText, jqxhr)
 		for(i = 0; i < rh3Data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / ((maxTime - minTime + 1) * 1000) *
+			x = x / ((maxTime - minTime) * 1000) *
 				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
@@ -341,12 +343,26 @@ function RHGraph(output, statusText, jqxhr)
 		context.stroke();
 	};
 	
-	setupGraph();
-	clearGraph();
-	drawBorder();
-	drawLegend();
-	updateTitle();
-	drawAxes();
-	setTimeLine();
-	plotPoints();
+	if(data[0][0] === "!")
+	{
+		errorMessage(data[0].substr(1));
+	}
+	else if(data[0][0] === "@")
+	{
+		warningMessage(data[0].substr(1));
+	}
+	else
+	{
+		setupGraph();
+		clearGraph();
+		drawBorder();
+		drawLegend();
+		updateTitle();
+		drawAxes();
+		setTimeLine();
+		plotPoints();
+		
+		if(!$("#rhCanvasDiv").is(":visible"))
+			$("#rhCanvasDiv").show("blind", 500);
+	}
 }

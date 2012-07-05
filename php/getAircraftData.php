@@ -25,7 +25,7 @@
 				$data .= $result["$request"] . ",";
 		
 		if($data == "")
-			throw new Exception("!$request data not present");
+			throw new Exception("@$request data not present");
 		
 		echo $data;
 	}

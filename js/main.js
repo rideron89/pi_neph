@@ -6,10 +6,11 @@ var time = 0;
 $(document).ready(function()
 {
 	$("#toc_item_list").hide();
+	$("#timeSelectionBox").hide();
 	$("#loadingIconDiv").slideDown(400);
 	
 	$("#timeSlider").slider({
-		stop: updateDisplayTime,
+		// stop: updateDisplayTime,
 		slide: updateDisplayTime,
 		change: updateSlider
 	});
@@ -27,6 +28,7 @@ $(document).ready(function()
 $(document).ajaxStop(function()
 {
 	$("#loadingIconDiv").slideUp(400);
+	$("#timeSelectionBox").slideDown(400);
 });
 
 /*
@@ -80,14 +82,14 @@ function saveTimes(output)
 	graphP11Log(flight, "red");
 	graphP11(flight, "red");
 	graphP12(flight, "green");
-	graphScat(flight, minTime, "blue");
+	graphScat(flight, minTime, maxTime, "blue");
 	buildMap();
-	graphAlt(flight, minTime, "purple");
-	graphPres(flight, minTime, "orange");
-	graphTemp(flight, minTime, "yellow");
-	graphRH(flight, minTime, "green", "orange", "purple");
+	graphAlt(flight, minTime, maxTime, "purple");
+	graphPres(flight, minTime, maxTime, "orange");
+	graphTemp(flight, minTime, maxTime, "yellow");
+	graphRH(flight, minTime, maxTime, "green", "orange", "purple");
 	
-	drawGraphs();
+	// drawGraphs();
 	
 	url = "/" + window.location.pathname.split('/')[1] + "/php/getCoefficientData.php";
 	
@@ -184,11 +186,11 @@ function updateGraphs(flight)
 
 function moveTimeLines()
 {
-	moveScatTimeLine(minTime);
-	moveAltTimeLine(minTime);
-	movePresTimeLine(minTime);
-	moveTempTimeLine(minTime);
-	moveRHTimeLine(minTime);
+	moveScatTimeLine(minTime, maxTime);
+	moveAltTimeLine(minTime, maxTime);
+	movePresTimeLine(minTime, maxTime);
+	moveTempTimeLine(minTime, maxTime);
+	moveRHTimeLine(minTime, maxTime);
 	
 	movePlaneMarker();
 }

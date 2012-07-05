@@ -78,7 +78,7 @@
 			<a id="r07Link" class="button_link" href="data.php?flight=r07">
 				Spirals: LaRC, Wallops, COVE
 			</a>
-			<span class="data_status">Missing P11 data</span>
+			<span class="data_status">Missing P12 data</span>
 		</div>
 		
 		<div>

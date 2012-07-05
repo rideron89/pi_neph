@@ -1,17 +1,18 @@
-function graphTemp(flight, minTime, color)
+function graphTemp(flight, minTime, maxTime, color)
 {
 	var url = "/" + window.location.pathname.split('/')[1] + "/php/getScatData.php";
 	
 	var post = $.post(url,
 		{flight: flight, request: "temperature"});
 	
-	post.minTime = minTime
+	post.minTime = minTime;
+	post.maxTime = maxTime;
 	post.color = color;
 	
 	post.done(TempGraph);
 }
 
-function moveTempTimeLine(minTime)
+function moveTempTimeLine(minTime, maxTime)
 {
 	var x;
 	var timeLine = document.getElementById("tempTimeLine");
@@ -39,7 +40,7 @@ function TempGraph(output, statusText, jqxhr)
 	var alphaLow = 0.2;
 	var largestY = 40;
 	var minTime = jqxhr.minTime;
-	var maxTime = minTime + 9;
+	var maxTime = jqxhr.maxTime;
 
 	var data = output.split(",");
 	var graph = document.getElementById("tempGraph");
@@ -116,10 +117,10 @@ function TempGraph(output, statusText, jqxhr)
 		context.font = "bold 11pt sans-serif";
 		context.lineWidth = 1;
 		
-		for(var i = 0; i < 11; i++)
+		for(var i = 0; i < (maxTime - minTime + 1); i++)
 		{
 			x = width - (padding * 2);
-			x = x / 10 * i;
+			x = x / (maxTime - minTime) * i;
 			x = x + padding;
 			
 			text = parseInt(minTime + (1 * i)) + "k";
@@ -165,7 +166,7 @@ function TempGraph(output, statusText, jqxhr)
 		var times = document.getElementById("timeSelect");
 		
 		x = width - (padding * 2);
-		x = x / ((maxTime - minTime + 1) * 1000) *
+		x = x / ((maxTime - minTime) * 1000) *
 			(times.options[0].text - (minTime * 1000));
 		x = x + padding;
 		
@@ -186,7 +187,7 @@ function TempGraph(output, statusText, jqxhr)
 		for(var i = 0; i < data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / ((maxTime - minTime + 1) * 1000) *
+			x = x / ((maxTime - minTime) * 1000) *
 				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
@@ -206,11 +207,25 @@ function TempGraph(output, statusText, jqxhr)
 		context.stroke();
 	};
 	
-	setupGraph();
-	clearGraph();
-	drawBorder();
-	updateTitle();
-	drawAxes();
-	setTimeLine();
-	plotPoints();
+	if(data[0][0] === "!")
+	{
+		errorMessage(data[0].substr(1));
+	}
+	else if(data[0][0] === "@")
+	{
+		warningMessage(data[0].substr(1));
+	}
+	else
+	{
+		setupGraph();
+		clearGraph();
+		drawBorder();
+		updateTitle();
+		drawAxes();
+		setTimeLine();
+		plotPoints();
+		
+		if(!$("#tempCanvasDiv").is(":visible"))
+			$("#tempCanvasDiv").show("blind", 500);
+	}
 }

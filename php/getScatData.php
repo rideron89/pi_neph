@@ -14,11 +14,18 @@
 		
 		while($result = $statement->fetch())
 			$data .= $result["$request"] . ",";
+			
+		if($data == "")
+			throw new Exception("@$request data could not be loaded!");
 		
 		echo $data;
 	}
 	catch(PDOException $e)
 	{
 		echo "!" . $e->getMessage();
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

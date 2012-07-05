@@ -1,27 +1,27 @@
-function graphAlt(flight, minTime, color)
+function graphAlt(flight, minTime, maxTime, color)
 {
 	var url = "/" + window.location.pathname.split('/')[1] + "/php/getAircraftData.php";
 	
 	var post = $.post(url,
 		{flight: flight, request: "gps_altitude"});
 	
-	post.minTime = minTime
+	post.minTime = minTime;
+	post.maxTime = maxTime;
 	post.color = color;
 	
 	post.done(AltGraph);
 }
 
-function moveAltTimeLine(minTime)
+function moveAltTimeLine(minTime, maxTime)
 {
 	var x;
 	var timeLine = document.getElementById("altTimeLine");
 	var times = document.getElementById("timeSelect");
 	var width = 640;
 	var padding = 64;
-	var maxTime = minTime + 9;
 
 	x = width - (padding * 2);
-	x = x / ((maxTime - minTime + 1) * 1000) *
+	x = x / ((maxTime - minTime) * 1000) *
 		(times.options[time].text - (minTime * 1000));
 	x = x + padding;
 
@@ -40,7 +40,7 @@ function AltGraph(output, statusText, jqxhr)
 	var largestY = 30; // must be easily divisible by number_of_ticks
 	var number_of_ticks = 6;
 	var minTime = jqxhr.minTime;
-	var maxTime = minTime + 9;
+	var maxTime = jqxhr.maxTime;
 
 	var data = output.split(",");
 	var graph = document.getElementById("altGraph");
@@ -117,10 +117,10 @@ function AltGraph(output, statusText, jqxhr)
 		context.font = "bold 11pt sans-serif";
 		context.lineWidth = 1;
 		
-		for(var i = 0; i < 11; i++)
+		for(var i = 0; i < (maxTime - minTime + 1); i++)
 		{
 			x = width - (padding * 2);
-			x = x / 10 * i;
+			x = x / (maxTime - minTime) * i;
 			x = x + padding;
 			
 			text = parseInt(minTime + (1 * i)) + "k";
@@ -166,7 +166,7 @@ function AltGraph(output, statusText, jqxhr)
 		var times = document.getElementById("timeSelect");
 		
 		x = width - (padding * 2);
-		x = x / ((maxTime - minTime + 1) * 1000) *
+		x = x / ((maxTime - minTime) * 1000) *
 			(times.options[0].text - (minTime * 1000));
 		x = x + padding;
 		
@@ -187,7 +187,7 @@ function AltGraph(output, statusText, jqxhr)
 		for(var i = 0; i < data.length-1; i++)
 		{
 			x = width - (padding * 2);
-			x = x / ((maxTime - minTime + 1) * 1000) *
+			x = x / ((maxTime - minTime) * 1000) *
 				(times.options[i].text - (minTime * 1000));
 			x = x + padding;
 		
@@ -203,13 +203,16 @@ function AltGraph(output, statusText, jqxhr)
 		context.stroke();
 	}
 	
-	if(data[0][0] === "!") {
+	if(data[0][0] === "!")
+	{
 		errorMessage(data[0].substr(1));
 	}
-	else if(data[0][0] === "@") {
+	else if(data[0][0] === "@")
+	{
 		warningMessage(data[0].substr(1));
 	}
-	else {
+	else
+	{
 		setupGraph();
 		clearGraph();
 		drawBorder();
@@ -217,5 +220,8 @@ function AltGraph(output, statusText, jqxhr)
 		drawAxes();
 		setTimeLine();
 		plotPoints();
+		
+		if(!$("#altCanvasDiv").is(":visible"))
+			$("#altCanvasDiv").show("blind", 500);
 	}
 }
