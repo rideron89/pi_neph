@@ -1,3 +1,6 @@
+var coords = [];
+var marker = null;
+
 function buildMap()
 {
 	var script = document.createElement("script");
@@ -14,8 +17,6 @@ function buildMap()
 
 function movePlaneMarker()
 {
-	var marker = null;
-	
 	marker.setPosition(coords.getAt(time));
 }
 
@@ -26,9 +27,7 @@ function Map()
 	var styler = null;
 	
 	var flightPath = null;
-	var coords = [];
 	var bounds = null;
-	var marker = null;
 	
 	var setupMap = function()
 	{

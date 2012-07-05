@@ -13,6 +13,9 @@
 		$statement->execute($param);
 		$result = $statement->fetch();
 		
+		if(!$result)
+			throw new Exception("@P12 data couldn't be found!");
+		
 		for($i = 3; $i <= 176; $i++)
 			$data .= $result["degree".$i] . ",";
 		
@@ -21,5 +24,9 @@
 	catch(PDOException $e)
 	{
 		echo ("!" . $e->getMessage());
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
 	}
 ?>

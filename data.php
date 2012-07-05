@@ -47,8 +47,8 @@
 	else if(strcmp("r07", $flight) == 0)
 	{
 		$flight_title = "Spirals: LaRC, Wallops, COVE";
-		$flight_time_start = 0;
-		$flight_time_start = 0;
+		$flight_time_start = 64;
+		$flight_time_end = 74;
 	}
 	else if(strcmp("r08", $flight) == 0)
 	{
@@ -100,13 +100,6 @@
 	<script type="text/javascript" src="js/lib/less.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
 	<script type="text/javascript" src="js/lib/jqueryui.js"></script>
-	
-	<script type="text/javascript" src="js/lib/head.js"></script>
-	
-	<script type="text/javascript">
-		head.js("js/utils.js", "js/timeSlider.js", "js/toc.js", "js/main.js", "js/p11Log.js", "js/p11.js", "js/p12.js", "js/scat.js",
-			"js/map.js", "js/alt.js", "js/pres.js", "js/temp.js", "js/rh.js");
-	</script>
 	
 	<?php
 	
@@ -299,4 +292,18 @@
 		</div>
 	</div> <!-- canvasBox -->
 </body>
+
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/timeSlider.js"></script>
+	<script type="text/javascript" src="js/toc.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/p11Log.js"></script>
+	<script type="text/javascript" src="js/p11.js"></script>
+	<script type="text/javascript" src="js/p12.js"></script>
+	<script type="text/javascript" src="js/scat.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript" src="js/alt.js"></script>
+	<script type="text/javascript" src="js/pres.js"></script>
+	<script type="text/javascript" src="js/temp.js"></script>
+	<script type="text/javascript" src="js/rh.js"></script>
 </html>

@@ -189,6 +189,8 @@ function moveTimeLines()
 	movePresTimeLine(minTime);
 	moveTempTimeLine(minTime);
 	moveRHTimeLine(minTime);
+	
+	movePlaneMarker();
 }
 
 function showCoefficientData(output)
