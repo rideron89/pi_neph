@@ -1,90 +1,96 @@
 <?php
-	if(!isset($_GET["flight"]))
-	{
-		$flight = "t01";
-	}
-	else
+	if(isset($_GET["flight"]))
 	{
 		$flight = $_GET["flight"];
 	}
+	else
+	{
+		$flight = "t01";
+	}
 	
-	if(strcmp("r01", $flight) == 0)
+	$flight_titles = array(
+		"t01" => "B200 Test Flight",
+		"r01" => "Spirals: LaRC, Wallops, COVE",
+		"r02" => "CALIPSO: Eastern",
+		"r03" => "Jackson Transit",
+		"r04" => "Jackson Local, CALIPSO & fires",
+		"r05" => "UC12 to LaRC, B200 to AVL, Spiral: Tusc.",
+		"r06" => "B200 to LaRC",
+		"r07" => "Spirals: LaRC, Wallops, COVE",
+		"r08" => "local fire: Spirals: LaRC, Wallops, COVE",
+		"r09" => "Groton Transit, M.A.: Brookhaven",
+		"r10" => "Groton Local #1, M.V., Th.F. & H.F.",
+		"r11" => "Groton Local #2, M.V., Th.F. & H.F.",
+		"r12" => "LaRC Transit, Spiral: Wallops"
+	);
+	
+	$flight_start_times = array(
+		"t01" => 66,
+		"r01" => 43,
+		"r02" => 62,
+		"r03" => 43,
+		"r04" => 66,
+		"r05" => 54,
+		"r06" => 67,
+		"r07" => 64,
+		"r08" => 0,
+		"r09" => 0,
+		"r10" => 0,
+		"r11" => 0,
+		"r12" => 0
+	);
+	
+	$flight_end_times = array(
+		"t01" => 75,
+		"r01" => 53,
+		"r02" => 72,
+		"r03" => 53,
+		"r04" => 76,
+		"r05" => 65,
+		"r06" => 76,
+		"r07" => 75,
+		"r08" => 0,
+		"r09" => 0,
+		"r10" => 0,
+		"r11" => 0,
+		"r12" => 0
+	);
+	
+	function get_flight_toc_item($flight)
 	{
-		$flight_title = "Spirals: LaRC, Wallops, COVE";
-		$flight_time_start = 43;
-		$flight_time_end = 53;
+		global $flight_titles;
+		
+		$output = "<div><a ";
+		$output .= "class='flight_toc_item'";
+		$output .= " href='data.php?flight=" . $flight . "'";
+		$output .= " title='" . $flight_titles[$flight] . "'>";
+		$output .= strtoupper($flight);
+		$output .= "</a></div>";
+		
+		return $output;
 	}
-	else if(strcmp("r02", $flight) == 0)
+	
+	function print_flight_toc()
 	{
-		$flight_title = "CALIPSO: Eastern";
-		$flight_time_start = 62;
-		$flight_time_end = 72;
-	}
-	else if(strcmp("r03", $flight) == 0)
-	{
-		$flight_title = "Jackson Transit";
-		$flight_time_start = 43;
-		$flight_time_end = 53;
-	}
-	else if(strcmp("r04", $flight) == 0)
-	{
-		$flight_title = "Jackson Local, CALIPSO & fires";
-		$flight_time_start = 66;
-		$flight_time_end = 76;
-	}
-	else if(strcmp("r05", $flight) == 0)
-	{
-		$flight_title = "UC12 to LaRC, B200 to AVL, Spiral: Tusc.";
-		$flight_time_start = 54;
-		$flight_time_end = 65;
-	}
-	else if(strcmp("r06", $flight) == 0)
-	{
-		$flight_title = "B200 to LaRC";
-		$flight_time_start = 67;
-		$flight_time_end = 76;
-	}
-	else if(strcmp("r07", $flight) == 0)
-	{
-		$flight_title = "Spirals: LaRC, Wallops, COVE";
-		$flight_time_start = 64;
-		$flight_time_end = 75;
-	}
-	else if(strcmp("r08", $flight) == 0)
-	{
-		$flight_title = "local fire: Spirals: LaRC, Wallops, COVE";
-		$flight_time_start = 0;
-		$flight_time_end = 0;
-	}
-	else if(strcmp("r09", $flight) == 0)
-	{
-		$flight_title = "Groton Transit, M.A.: Brookhaven";
-		$flight_time_start = 0;
-		$flight_time_end = 0;
-	}
-	else if(strcmp("r10", $flight) == 0)
-	{
-		$flight_title = "Groton Local #1, M.V., Th.F. & H.F.";
-		$flight_time_start = 0;
-		$flight_time_end = 0;
-	}
-	else if(strcmp("r11", $flight) == 0)
-	{
-		$flight_title = "Groton Local #2, M.V., Th.F. & H.F.";
-		$flight_time_start = 0;
-		$flight_time_end = 0;
-	}
-	else if(strcmp("r12", $flight) == 0)
-	{
-		$flight_title = "LaRC Transit, Spiral: Wallops";
-		$flight_time_start = 0;
-		$flight_time_end = 0;
-	}
-	else // t01
-	{
-		$flight_title = "B200 Test Flight";
-		$flight_time_start = 66;
-		$flight_time_end = 75;
+		global $flight;
+		
+		$html_output = "<div id='flight_toc_current_flight' title='Current Flight'>" . strtoupper($flight) . "</div>";
+		
+		$html_output .= get_flight_toc_item("t01");
+		$html_output .= get_flight_toc_item("r01");
+		$html_output .= get_flight_toc_item("r02");
+		$html_output .= get_flight_toc_item("r03");
+		$html_output .= get_flight_toc_item("r04");
+		$html_output .= get_flight_toc_item("r05");
+		$html_output .= get_flight_toc_item("r06");
+		$html_output .= get_flight_toc_item("r07");
+		$html_output .= get_flight_toc_item("r08");
+		$html_output .= get_flight_toc_item("r09");
+		$html_output .= get_flight_toc_item("r10");
+		$html_output .= get_flight_toc_item("r11");
+		$html_output .= get_flight_toc_item("r12");
+		
+		return $html_output;
 	}
 ?>
 <!DOCTYPE html>
@@ -92,7 +98,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<title><?php echo $flight_title; ?></title>
+	<title><?php echo $flight_titles[$flight]; ?></title>
 	
 	<link rel="stylesheet" type="text/css" href="style/ui/jqueryui.css" />
 	<link rel="stylesheet/less" type="text/css" href="style/main.less" />
@@ -105,8 +111,8 @@
 	
 		echo "<script type=\"text/javascript\">";
 		echo "var flight = \"" . $flight . "\";";
-		echo "var minTime = parseInt(" . $flight_time_start . ");";
-		echo "var maxTime = parseInt(" . $flight_time_end . ");";
+		echo "var minTime = parseInt(" . $flight_start_times[$flight] . ");";
+		echo "var maxTime = parseInt(" . $flight_end_times[$flight] . ");";
 		echo "</script>";
 	
 	?>
@@ -114,7 +120,7 @@
 <body>
 	
 	<div id="title_div">
-		<h2><?php echo $flight_title . " (" . strtoupper($flight) . ")"; ?></h2>
+		<h2><?php echo $flight_titles[$flight] . " (" . strtoupper($flight) . ")"; ?></h2>
 	</div>
 	
 	<div>
@@ -180,38 +186,48 @@
 		</div>
 	</div> <!-- pinnedDataBox -->
 	
-	<div id="toc_box">
-		<div id="toc_label" onclick="toggleToc()">
-			Table of Contents
+	<div id="graph_toc_box">
+		<div id="graph_toc_label" onclick="toggle_graph_toc()">
+			Graph Headers
 		</div>
 		
-		<div id="toc_item_list">
-			<button class="toc_item"  onclick="tocItem('p11LogCanvasDiv')">
+		<div id="graph_toc_item_list">
+			<button class="graph_toc_item"  onclick="graph_toc_item('p11LogCanvasDiv')">
 				P11, aerosol only phase function
 			</button><br />
-			<button class="toc_item" onclick="tocItem('p11CanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('p11CanvasDiv')">
 				P11, aerosol only phase function (small)
 			</button><br />
-			<button class="toc_item" onclick="tocItem('p12CanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('p12CanvasDiv')">
 				-P12/P11, aerosol only degree of linear polarization
 			</button><br />
-			<button class="toc_item" onclick="tocItem('scatCanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('scatCanvasDiv')">
 				Linear Scattering Coefficient
 			</button><br />
-			<button class="toc_item" onclick="tocItem('altCanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('mapCanvasDiv')">
+				Aircraft Flight Path
+			</button><br />
+			<button class="graph_toc_item" onclick="graph_toc_item('altCanvasDiv')">
 				GPS Altitude
 			</button><br />
-			<button class="toc_item" onclick="tocItem('presCanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('presCanvasDiv')">
 				Pressure Inside PI-Neph Chamber
 			</button><br />
-			<button class="toc_item" onclick="tocItem('tempCanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('tempCanvasDiv')">
 				Temperature Inside PI-Neph Chamber
 			</button><br />
-			<button class="toc_item" onclick="tocItem('rhCanvasDiv')">
+			<button class="graph_toc_item" onclick="graph_toc_item('rhCanvasDiv')">
 				Relative Humidity
 			</button>
 		</div>
-	</div> <!-- tocBox -->
+	</div> <!-- graph_toc_box -->
+	
+	<div id="flight_toc_box">
+		<div id="flight_toc_label">&uarr;&nbsp;&nbsp;&nbsp;Table of Contents&nbsp;&nbsp;&nbsp;&uarr;</div>
+		<div id="flight_toc_item_list">
+			<?php echo print_flight_toc(); ?>
+		</div>
+	</div> <!-- flight_toc_box -->
 	
 	<div id="canvasBox">
 		<div id="p11LogCanvasDiv" class="canvasDiv">

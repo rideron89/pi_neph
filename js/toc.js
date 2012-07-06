@@ -1,9 +1,9 @@
-function toggleToc()
+function toggle_graph_toc()
 {
-	$("#toc_item_list").toggle("blind", 50);
+	$("#graph_toc_item_list").toggle("blind", 50);
 }
 
-function tocItem(element)
+function graph_toc_item(element)
 {
 	element = "#" + element;
 	

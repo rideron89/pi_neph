@@ -5,7 +5,7 @@ var time = 0;
  */
 $(document).ready(function()
 {
-	$("#toc_item_list").hide();
+	$("#graph_toc_item_list").hide();
 	$("#timeSelectionBox").hide();
 	$("#loadingIconDiv").slideDown(400);
 	
